@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {PnlService} from 'src/app/services/pnl.service'
+
 
 @Component({
   selector: 'app-dashboard',
@@ -7,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
   toplamMaliyet:number
-  constructor() { }
+
+  constructor(private pnlService:PnlService) { }
 
   ngOnInit(): void {
   }
@@ -20,20 +23,11 @@ export class DashboardComponent implements OnInit {
     return amount*price
   }
 
-  profitLoss(amount:number, cost:number, price:number):number{
-    let pnl:number = (amount*price)-(amount*cost)
-    let pnls:string = pnl.toFixed(2)
-    pnl = +pnls
-    return pnl
+  pnlCalculate(amount:number, cost:number, price:number):number {
+    return this.pnlService.profitLoss(amount, cost, price)
   }
 
-  profitLossPercent(cost:number, price:number):number{
-    let pnl:number = ((price-cost)/price)*100
-    let pnls:string = pnl.toFixed(2)
-    pnl = +pnls
-    return pnl
+  pnlCalculatePercent(cost:number, price:number):number {
+    return this.pnlService.profitLossPercent(cost, price)
   }
-
-
-
 }
