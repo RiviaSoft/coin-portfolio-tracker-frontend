@@ -9,8 +9,8 @@ import { NaviComponent } from './components/navi/navi.component';
 import { WalletsComponent } from './components/wallets/wallets.component';
 import { WalletDetailComponent } from './components/wallet-detail/wallet-detail.component';
 import { ArchivedOperationsComponent } from './components/archived-operations/archived-operations.component';
-import { WhaleAlertComponent } from './components/whale-alert/whale-alert.component';
 import { SummaryComponent } from './components/summary/summary.component';
+import { AnalyzesComponent } from './components/analyzes/analyzes.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +21,8 @@ import { SummaryComponent } from './components/summary/summary.component';
     WalletsComponent,
     WalletDetailComponent,
     ArchivedOperationsComponent,
-    WhaleAlertComponent,
-    SummaryComponent
+    SummaryComponent,
+    AnalyzesComponent
   ],
   imports: [
     BrowserModule,
