@@ -25,16 +25,20 @@
             <span style="float: right">5.129</span>
             <br />
             <strong>Toplam Maliyet:</strong>
-            <span style="float: right">382.5567</span>
+            <span style="float: right">{{totalCostCalculate(5.129, 50)}}</span>
           </td>
           <td class="text-center">
             <strong>Birim Değer:</strong>
             <span style="float: right">5,205</span>
             <br/>
             <strong>Toplam Değer:</strong>
-            <span style="float: right">402.85</span>
+            <span style="float: right">{{totalValueCalculate(5.205, 50)}}</span>
           </td>
-          <td class="text-center">99,225</td>
+          <td class="text-center">
+            <span>${{profitLoss(50, 5.1290, 5.205)}}</span>
+          <br/>
+          <span>%{{profitLossPercent(5.1290, 5.205)}}</span>
+          </td>
           <td class="text-center">
             <div class="dropdown">
               <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
