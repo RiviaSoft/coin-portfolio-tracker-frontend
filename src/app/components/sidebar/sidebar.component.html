@@ -1,7 +1,8 @@
 <div class="list-group" style="border-radius: 6px;">
-  <a href="#" class="list-group-item list-group-item-action  active" aria-current="true">Hesap Özeti</a>
-  <a href="#" class="list-group-item list-group-item-action bg-dark">Cüzdanlar</a>
-  <a href="#" class="list-group-item list-group-item-action bg-dark">Arşivlenmiş Aktiviteler</a>
-  <a href="#" class="list-group-item list-group-item-action bg-dark">Balina Hareketleri</a>
+  <a routerLink="" (click)="setCurrentTab('summary')" [class]="getCurrentCategoryClass('summary')">Hesap Özeti</a>
+  <a routerLink="details" (click)="setCurrentTab('dashboard')" [class]="getCurrentCategoryClass('dashboard')">Coinler</a>
+  <a routerLink="wallets" (click)="setCurrentTab('wallets')" [class]="getCurrentCategoryClass('wallets')">Cüzdanlar</a>
+  <a routerLink="archivedops" (click)="setCurrentTab('archivedops')" [class]="getCurrentCategoryClass('archivedops')">Arşivlenmiş Aktiviteler</a>
+  <a routerLink="whalealert" (click)="setCurrentTab('whale')" [class]="getCurrentCategoryClass('whale')">Balina Hareketleri</a>
 </div>
 
