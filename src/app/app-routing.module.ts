@@ -8,8 +8,8 @@ import { WalletsComponent } from './components/wallets/wallets.component';
 import { WhaleAlertComponent } from './components/whale-alert/whale-alert.component';
 
 const routes: Routes = [
-  {path : "", component:SummaryComponent},
-  {path : "details", component:DashboardComponent},
+  {path : "", component:DashboardComponent},
+  {path : "summary", component:SummaryComponent},
   {path : "wallets", component:WalletsComponent},
   {path : "wallets/:walletId", component:WalletDetailComponent},
   {path : "archivedops", component:ArchivedOperationsComponent},
