@@ -11,7 +11,7 @@ import { WalletDetailComponent } from './components/wallet-detail/wallet-detail.
 import { WalletsComponent } from './components/wallets/wallets.component';
 
 const routes: Routes = [
-  {path : "", component:DashboardComponent},
+  {path : "dashboard", component:DashboardComponent},
   {path : "login", component:LoginComponent},
   {path : "summary", component:SummaryComponent},
   {path : "wallets", component:WalletsComponent},
