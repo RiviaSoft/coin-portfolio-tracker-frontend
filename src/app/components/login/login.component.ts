@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validator, FormBuilder, Validators } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
 
   loginForm:FormGroup;
-  constructor(private formBuilder:FormBuilder, private authService:AuthService) { }
+  constructor(private formBuilder:FormBuilder, private authService:AuthService, private toastrService:ToastrService) { }
 
   ngOnInit(): void {
     this.createLoginForm();
@@ -28,12 +29,27 @@ export class LoginComponent implements OnInit {
   login(){
     if(this.loginForm.valid){
       let loginModel = Object.assign({}, this.loginForm.value)
-      console.log(this.loginForm.value)
       this.authService.login(loginModel).subscribe(data=>{
-        console.log(data)
-      })
+      let responseModel = Object.assign({}, data)
+      console.log(responseModel)
+    })
+      
+    }else{
+      this.toastrService.error("Geçersiz Giriş")
     }
   }
 
-  
+  isAuth(){
+    if(this.authService.isAuthenticated()){
+      this.toastrService.success("Giriş Yapıldı", "Başarılı")
+    }else{
+      this.toastrService.error("Giriş Başarısız", "Hata")
+    }
+  }
+
+
 }
+
+
+
+
