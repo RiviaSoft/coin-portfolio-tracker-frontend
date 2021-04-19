@@ -11,6 +11,8 @@ import { WalletDetailComponent } from './components/wallet-detail/wallet-detail.
 import { ArchivedOperationsComponent } from './components/archived-operations/archived-operations.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { AnalyzesComponent } from './components/analyzes/analyzes.component';
+import { LoginComponent } from './components/login/login.component';
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -22,11 +24,13 @@ import { AnalyzesComponent } from './components/analyzes/analyzes.component';
     WalletDetailComponent,
     ArchivedOperationsComponent,
     SummaryComponent,
-    AnalyzesComponent
+    AnalyzesComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
