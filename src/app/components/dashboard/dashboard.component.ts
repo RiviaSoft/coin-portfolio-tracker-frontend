@@ -44,11 +44,9 @@ export class DashboardComponent implements OnInit {
   }
 
   getRecentOperations() {
-    this.httpClient
-      .get<ListResultModel<RecentOperationModel>>(this.apiUrl + 'operations/getall')
-      .subscribe((response) => {
-        this.recentOperations=response
-        console.log(response);
-      });
+    this.operationsService.getRecentOperations().subscribe((response)=>{
+      this.recentOperations.data=response.data
+      console.log(this.recentOperations)
+    })
   }
 }

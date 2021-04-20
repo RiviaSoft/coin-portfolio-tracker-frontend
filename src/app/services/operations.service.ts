@@ -11,14 +11,14 @@ export class OperationsService {
   recentOperationsModel:ListResultModel<RecentOperationModel>;
 
   apiUrl:string="http://127.0.0.1:8000/api/"
+  
 
   constructor(private httpClient:HttpClient) { }
 
-  getRecentOperations(){
-    this.httpClient.get<ListResultModel<RecentOperationModel>>(this.apiUrl+"operations/getall").subscribe(response=>{
-      this.recentOperationsModel.data =response.data
-      console.log(response)
-    })
+  
+  getRecentOperations():Observable<ListResultModel<RecentOperationModel>>{
+    let newPath = this.apiUrl+"operations/getall"
+    return this.httpClient.get<ListResultModel<RecentOperationModel>>(newPath)
   }
 
 }
