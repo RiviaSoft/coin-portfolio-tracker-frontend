@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserModel } from 'src/app/models/userModel';
 import { AuthService } from 'src/app/services/auth.service';
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private routerService:Router
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +45,7 @@ export class LoginComponent implements OnInit {
         this.token = data["token"];
         localStorage.setItem("token", data.token)
         this.toastrService.success('Giriş Başarılı !!');
+        this.routerService.navigate(["dashboard"])
       }, responseError=>{
         this.toastrService.error("Hata", "Email veya parola hatalı")
       });
