@@ -1,4 +1,4 @@
-export interface RecentOperationsModel{
+export interface RecentOperationModel{
     userId:number
     coinSymbol:string
     coinAmount:number

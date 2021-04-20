@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { RecentOperationsModel } from 'src/app/models/recentOperationsModel';
+import { ListResultModel } from 'src/app/models/dataResultModel';
+import { RecentOperationModel } from 'src/app/models/recentOperationModel';
 import { OperationsService } from 'src/app/services/operations.service';
 import { PnlService } from 'src/app/services/Pnl.service';
 
@@ -13,7 +14,7 @@ export class DashboardComponent implements OnInit {
   toplamMaliyet: number;
   apiUrl: string = 'http://127.0.0.1:8000/api/';
   
-  recentOperations:RecentOperationsModel[]
+  recentOperations:ListResultModel<RecentOperationModel>
 
   constructor(
     private httpClient: HttpClient,
@@ -23,7 +24,7 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getRecentOperions();
+    this.getRecentOperations();
   }
 
   totalCostCalculate(amount: number, cost: number): number {
@@ -42,9 +43,9 @@ export class DashboardComponent implements OnInit {
     return this.pnlService.profitLossPercent(cost, price);
   }
 
-  getRecentOperions() {
+  getRecentOperations() {
     this.httpClient
-      .get<RecentOperationsModel[]>(this.apiUrl + 'operations/getall')
+      .get<ListResultModel<RecentOperationModel>>(this.apiUrl + 'operations/getall')
       .subscribe((response) => {
         this.recentOperations=response
         console.log(response);

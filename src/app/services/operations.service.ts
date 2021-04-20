@@ -1,21 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RecentOperationsModel } from '../models/recentOperationsModel';
+import { ListResultModel } from '../models/dataResultModel';
+import { RecentOperationModel } from '../models/recentOperationModel';
 @Injectable({
   providedIn: 'root'
 })
 export class OperationsService {
 
-  recentOperationsModel:RecentOperationsModel[] = [];
+  recentOperationsModel:ListResultModel<RecentOperationModel>;
 
   apiUrl:string="http://127.0.0.1:8000/api/"
 
   constructor(private httpClient:HttpClient) { }
 
   getRecentOperations(){
-    this.httpClient.get<RecentOperationsModel[]>(this.apiUrl+"operations/getall").subscribe(response=>{
-      this.recentOperationsModel=response
+    this.httpClient.get<ListResultModel<RecentOperationModel>>(this.apiUrl+"operations/getall").subscribe(response=>{
+      this.recentOperationsModel.data =response.data
       console.log(response)
     })
   }
