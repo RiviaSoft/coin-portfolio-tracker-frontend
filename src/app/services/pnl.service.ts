@@ -15,7 +15,7 @@ export class PnlService {
   }
 
   profitLossPercent(cost:number, price:number):number{
-    let pnl:number = ((price-cost)/price)*100
+    let pnl:number = (price-cost)/cost*100
     let pnls:string = pnl.toFixed(2)
     pnl = +pnls
     return pnl

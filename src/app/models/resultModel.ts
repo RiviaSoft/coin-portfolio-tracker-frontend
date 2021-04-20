@@ -1,4 +1,4 @@
-export interface Result{
+export interface ResultModel{
     success:boolean;
     message:string;
 }

@@ -1,9 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ListResultModel } from 'src/app/models/dataResultModel';
+import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 import { RecentOperationModel } from 'src/app/models/recentOperationModel';
+import { ResultModel } from 'src/app/models/resultModel';
 import { OperationsService } from 'src/app/services/operations.service';
 import { PnlService } from 'src/app/services/Pnl.service';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -11,17 +14,13 @@ import { PnlService } from 'src/app/services/Pnl.service';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  toplamMaliyet: number;
-  apiUrl: string = 'http://127.0.0.1:8000/api/';
-  
-  recentOperations:RecentOperationModel[]
+  recentOperations: RecentOperationModel[];
 
   constructor(
-    private httpClient: HttpClient,
     private pnlService: PnlService,
-    private operationsService: OperationsService
+    private operationsService: OperationsService,
+    private toastrService:ToastrService
   ) {}
-
 
   ngOnInit(): void {
     this.getRecentOperations();
@@ -44,9 +43,23 @@ export class DashboardComponent implements OnInit {
   }
 
   getRecentOperations() {
-    this.operationsService.getRecentOperations().subscribe((response)=>{
-      this.recentOperations = response
-      console.log(this.recentOperations)
+    this.operationsService.getRecentOperations().subscribe((response) => {
+      this.recentOperations = response;
+    });
+  }
+
+  deleteRecentOperation(operation:RecentOperationModel){
+    this.operationsService.deleteRecentOperation(operation).subscribe(response=>{
+      this.toastrService.success("İşlem silindi.", "Başarılı")
+      this.ngOnInit()
+    })
+  }
+
+  addArchivedOperation(operation:RecentOperationModel){
+    this.operationsService.addArchivedOperation(operation).subscribe(response=>{ 
+      this.toastrService.success("Coin satıldı.", "Başarılı")
+      this.ngOnInit()
+      
     })
   }
 }
