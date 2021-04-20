@@ -15,13 +15,13 @@
       <tr *ngFor="let operation of recentOperations">
         <td class="text-center">
           <div class="badge bg-success">
-            <h6>{{operation.coinSymbol}}</h6>
+            <h6>{{operation.coinsymbol}}</h6>
           </div>
         </td>
-        <td class="text-center">{{operation.coinAmount}}</td>
+        <td class="text-center">{{operation.coinamount}}</td>
         <td class="text-center">
           <strong>Birim Maliyet:</strong>
-          <span style="float: right">{{operation.buyCost}}</span>
+          <span style="float: right">{{operation.buycost}}</span>
           <br />
           <strong>Toplam Maliyet:</strong>
           <span style="float: right">{{totalCostCalculate(5.129, 50)}}</span>

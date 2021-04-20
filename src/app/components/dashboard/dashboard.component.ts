@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
   toplamMaliyet: number;
   apiUrl: string = 'http://127.0.0.1:8000/api/';
   
-  recentOperations:ListResultModel<RecentOperationModel>
+  recentOperations:RecentOperationModel[]
 
   constructor(
     private httpClient: HttpClient,
@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
 
   getRecentOperations() {
     this.operationsService.getRecentOperations().subscribe((response)=>{
-      this.recentOperations.data=response.data
+      this.recentOperations = response
       console.log(this.recentOperations)
     })
   }
