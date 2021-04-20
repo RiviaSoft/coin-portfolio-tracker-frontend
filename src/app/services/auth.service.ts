@@ -10,7 +10,6 @@ import { UserModel } from '../models/userModel';
 export class AuthService {
   apiUrl:string="http://127.0.0.1:8000/api/auth/"
   token:TokenModel;
-  error:any;
   constructor(private httpClient:HttpClient) { }
 
   login(userModel:UserModel):Observable<TokenModel>{
@@ -25,6 +24,6 @@ export class AuthService {
     }
   }
 
-  
+
 
 }
