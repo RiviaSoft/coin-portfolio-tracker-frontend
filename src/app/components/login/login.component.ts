@@ -39,13 +39,15 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.loginForm.valid) {
       let loginModel = this.loginForm.value;
-      this.authService.login(loginModel).subscribe((data) => {
-        this.token = data.token;
-        console.log(this.token);
+      this.authService.login(loginModel).subscribe(data => {
+        this.token = data["token"];
+        localStorage.setItem("token", data.token)
         this.toastrService.success('Giriş Başarılı !!');
+      }, responseError=>{
+        this.toastrService.error("Hata", "Email veya parola hatalı")
       });
     } else {
-      this.toastrService.error('Geçersiz Giriş');
+      this.toastrService.error('Geçersiz Giriş !');
     }
   }
 
