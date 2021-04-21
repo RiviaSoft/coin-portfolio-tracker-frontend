@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CurrentUserModel } from '../models/currentUserModel';
 import { UserModel } from '../models/userModel';
 
 @Injectable({
@@ -13,8 +12,8 @@ export class UserService {
 
   constructor(private httpClient:HttpClient) { }
 
-  getUser():Observable<CurrentUserModel>{
+  getUser():Observable<UserModel>{
     let newPath = this.apiUrl+"users/getcurrentuser"
-    return this.httpClient.get<CurrentUserModel>(newPath)
+    return this.httpClient.get<UserModel>(newPath)
   }
 }

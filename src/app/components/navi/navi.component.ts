@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CurrentUserModel } from 'src/app/models/currentUserModel';
+import { Router } from '@angular/router';
+import { UserModel } from 'src/app/models/userModel';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -8,8 +9,13 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./navi.component.css']
 })
 export class NaviComponent implements OnInit {
-  currentUser:CurrentUserModel;
-  constructor(private userService:UserService) { }
+  isLogin:boolean = false;
+  currentUser:UserModel;
+
+  constructor(
+    private router:Router,
+    private userService:UserService
+    ) { }
 
   ngOnInit(): void {
     this.getCurrentUser();
@@ -18,10 +24,17 @@ export class NaviComponent implements OnInit {
   getCurrentUser(){
     this.userService.getUser().subscribe((data) => {
       this.currentUser = data;
+      if(data.name != undefined){
+        this.isLogin = true;
+      }
     })
+  }
+  updateProfile(){
+    
   }
 
   logOut(){
     localStorage.removeItem("token")
+    this.router.navigate(["login"]);
   }
 }
