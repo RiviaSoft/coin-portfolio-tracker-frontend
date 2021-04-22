@@ -18,7 +18,6 @@ const routes: Routes = [
   {path : "archivedops", component:ArchivedOperationsComponent},
   {path : "analyzes", component:AnalyzesComponent}
 ];
-console.log("mokar")
 @NgModule({
   imports: [RouterModule.forRoot(routes), BrowserModule, FormsModule, ReactiveFormsModule],
   exports: [RouterModule]
