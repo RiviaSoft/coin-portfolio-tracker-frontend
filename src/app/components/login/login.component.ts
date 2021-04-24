@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     if(this.authService.isAuthenticated()){
       this.routerService.navigate(["home/dashboard"])
     }else {
-      this.routerService.navigate(["register"])
+      this.routerService.navigate(["login"])
     }
   }
 
