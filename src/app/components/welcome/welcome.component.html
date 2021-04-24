@@ -3,16 +3,12 @@
     <img src="./assets/coins.png" class="img-fluid" width="500" height="400">
   </div>
   <div class="col-md-5 align-self-center">
-    <div class="card" style="background-color: transparent;">
-      <div class="card-title">
-        <nav class="nav nav-pills justify-content-center">
-          <a [class]="getClass('login')" aria-current="page" (click)="setSelected('login')" routerLink="login">Giriş Yap</a>
+    <div class="container-sm">
+        <nav class="nav nav-pills justify-content-center" style="">
+          <a [class]="getClass('login')" aria-current="page" (click)="setSelected('login')" routerLink="">Giriş Yap</a>
           <a [class]="getClass('register')" (click)="setSelected('register')" routerLink="register">Kayıt Ol</a>
         </nav>
-      </div>
-      <div class="card-body">
         <router-outlet></router-outlet>
-      </div>
     </div>
   </div>
 </div>

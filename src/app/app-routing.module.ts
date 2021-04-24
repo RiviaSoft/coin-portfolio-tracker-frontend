@@ -14,8 +14,8 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { LoginGuardService } from './services/login-guard.service';
 
 const routes: Routes = [
-  {path : "", component:WelcomeComponent, children: [
-    { path: 'login', component: LoginComponent },
+  {path : '', component:WelcomeComponent, children: [
+    { path: '', component: LoginComponent },
     { path: 'register', component: RegisterComponent }
   ]},
   {path:"home", component:HomeComponent,canActivate: [LoginGuardService], children: [
