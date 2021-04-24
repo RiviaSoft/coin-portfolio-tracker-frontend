@@ -22,6 +22,11 @@ export class OperationsService {
     return this.httpClient.get<RecentOperationModel[]>(newPath)
   }
 
+  getRecentOperationById(id:number):Observable<RecentOperationModel>{
+    let newPath = this.apiUrl + "/operations/get/id:" + id
+    return this.httpClient.get<RecentOperationModel>(newPath)
+  }
+
   deleteRecentOperation(operation:RecentOperationModel):Observable<ResultModel>{
     console.log(operation)
     let newPath = this.apiUrl+"operations/delete"

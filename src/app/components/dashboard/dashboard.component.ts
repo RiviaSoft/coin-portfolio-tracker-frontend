@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { RecentOperationModel } from 'src/app/models/recentOperationModel';
@@ -15,6 +16,8 @@ import { PnlService } from 'src/app/services/Pnl.service';
 })
 export class DashboardComponent implements OnInit {
   recentOperations: RecentOperationModel[];
+  
+
 
   constructor(
     private pnlService: PnlService,
@@ -48,6 +51,12 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  getRecentOperationsById(id:number) {
+    this.operationsService.getRecentOperationById(id).subscribe((response) =>{
+      console.log(response)
+    })
+  }
+
   deleteRecentOperation(operation:RecentOperationModel){
     this.operationsService.deleteRecentOperation(operation).subscribe(response=>{
       this.toastrService.success("İşlem silindi.", "Başarılı")
@@ -62,4 +71,9 @@ export class DashboardComponent implements OnInit {
       
     })
   }
+  
+  test(){
+    console.log("adam")
+  }
+
 }
