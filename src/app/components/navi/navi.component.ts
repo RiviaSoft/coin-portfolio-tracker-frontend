@@ -38,6 +38,7 @@ export class NaviComponent implements OnInit {
   logOut(){
     localStorage.removeItem("token")
     this.router.navigate(["login"]);
+    this.toastrService.success("Çıkış Yapıldı", "Başarılı")
   }
 
 }
