@@ -17,6 +17,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { SelectDropDownModule } from 'ngx-select-dropdown'
+import { LoginGuardService } from "./services/login-guard.service";
+import { HomeComponent } from './components/home/home.component';
+import { RegisterComponent } from './components/register/register.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
+
 
 @NgModule({
   declarations: [
@@ -29,6 +34,9 @@ import { SelectDropDownModule } from 'ngx-select-dropdown'
     SummaryComponent,
     AnalyzesComponent,
     LoginComponent,
+    HomeComponent,
+    RegisterComponent,
+    WelcomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +52,8 @@ import { SelectDropDownModule } from 'ngx-select-dropdown'
     
   ],
   providers: [
-    {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}
+    {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true},
+    LoginGuardService
   ],
   bootstrap: [AppComponent]
 })
