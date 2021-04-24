@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { UserModel } from 'src/app/models/userModel';
 import { UserService } from 'src/app/services/user.service';
 
@@ -14,7 +15,8 @@ export class NaviComponent implements OnInit {
 
   constructor(
     private router:Router,
-    private userService:UserService
+    private userService:UserService,
+    private toastrService:ToastrService
     ) { }
 
   ngOnInit(): void {
@@ -30,11 +32,12 @@ export class NaviComponent implements OnInit {
     })
   }
   updateProfile(){
-    
+    this.toastrService.info("Yakında...")
   }
 
   logOut(){
     localStorage.removeItem("token")
     this.router.navigate(["login"]);
   }
+
 }
