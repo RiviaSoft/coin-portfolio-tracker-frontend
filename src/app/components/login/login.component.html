@@ -1,7 +1,5 @@
 <div class="form-signin card" style="background-color: transparent;border-radius: 8px;">
   <form [formGroup]="loginForm">
-    <h1 class="h3 mb-3 fw-normal">Giriş Yap</h1>
-
     <div class="form-floating">
       <input
         formControlName="email"
@@ -21,7 +19,6 @@
         placeholder="Parola"
       />
     </div>
-
     <button class="w-100 btn btn-success" (click)="login()">Giriş Yap</button>
   </form>
 </div>
