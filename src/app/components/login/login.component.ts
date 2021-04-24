@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
         this.token = data["token"];
         localStorage.setItem("token", data.token)
         this.toastrService.success('Giriş Başarılı !!');
-        this.routerService.navigate(["dashboard"])
+        this.routerService.navigate(["home/dashboard"])
       }, responseError=>{
         this.toastrService.error("Hata", "Email veya parola hatalı")
       });

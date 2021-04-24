@@ -14,7 +14,6 @@ export class LoginGuardService implements CanActivate{
     state: RouterStateSnapshot
   ): boolean {
     let logged = this.authservice.isAuthenticated();
-    console.log(logged)
     if (logged) {
       return true;
     }
