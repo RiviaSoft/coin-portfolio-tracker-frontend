@@ -1,1 +1,41 @@
-<p>register works!</p>
+<div class="form-signin card" style="background-color: transparent;border-radius: 8px;">
+    <form [formGroup]="registerForm">
+      <h1 class="h3 mb-3 fw-normal">Kayıt Ol</h1>
+        
+
+      <div class="form-floating">
+        <input
+          formControlName="name"
+          type="text"
+          class="form-control bg-dark"
+          id="floatingName"
+          placeholder="İsim"
+        />
+      </div>
+      <br />
+
+      <div class="form-floating">
+        <input
+          formControlName="email"
+          type="email"
+          class="form-control bg-dark"
+          id="floatingInput"
+          placeholder="Email"
+        />
+      </div>
+      
+      <br />
+      <div class="form-floating">
+        <input
+          formControlName="password"
+          type="password"
+          class="form-control bg-dark"
+          id="floatingPassword"
+          placeholder="Parola"
+        />
+      </div>
+  
+      <button class="w-100 btn btn-success" (click)="register()">Kayıt Ol</button>
+    </form>
+  </div>
+  
