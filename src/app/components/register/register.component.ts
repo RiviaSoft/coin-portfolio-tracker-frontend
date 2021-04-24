@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
     if(this.authService.isAuthenticated()){
       this.routerService.navigate(["home/dashboard"])
     }else {
-      this.routerService.navigate(["login"])
+      this.routerService.navigate(["register"])
     }
   }
 
