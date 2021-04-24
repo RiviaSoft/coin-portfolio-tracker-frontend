@@ -1,8 +1,5 @@
 <div class="form-signin card" style="background-color: transparent;border-radius: 8px;">
     <form [formGroup]="registerForm">
-      <h1 class="h3 mb-3 fw-normal">Kayıt Ol</h1>
-        
-
       <div class="form-floating">
         <input
           formControlName="name"
@@ -23,7 +20,6 @@
           placeholder="Email"
         />
       </div>
-      
       <br />
       <div class="form-floating">
         <input
@@ -34,7 +30,7 @@
           placeholder="Parola"
         />
       </div>
-  
+      <br>
       <button class="w-100 btn btn-success" (click)="register()">Kayıt Ol</button>
     </form>
   </div>
