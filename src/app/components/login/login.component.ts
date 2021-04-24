@@ -53,12 +53,4 @@ export class LoginComponent implements OnInit {
       this.toastrService.error('Geçersiz Giriş !');
     }
   }
-
-  isAuth() {
-    if (this.authService.isAuthenticated()) {
-      this.toastrService.success('Giriş Yapıldı', 'Başarılı');
-    } else {
-      this.toastrService.error('Giriş Başarısız', 'Hata');
-    }
-  }
 }
