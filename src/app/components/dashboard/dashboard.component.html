@@ -1,14 +1,15 @@
-<ng-multiselect-dropdown
-  [placeholder]="'Coin Ekle'"
-  [settings]="dropdownSettings"
-  [data]="dropdownList"
-  [(ngModel)]="selectedItems"
-  (onSelect)="onItemSelect($event)"
-  class="bg-dark"
->
-</ng-multiselect-dropdown>
-
 <div class="container-fluid">
+  <button
+  type="button"
+  class="btn btn-primary"
+  data-toggle="modal"
+  data-target="#operationAddModel"
+>
+  Coin Ekle
+</button>
+<br>
+<br>
+  
   <table class="table">
     <thead>
       <tr>
@@ -24,45 +25,68 @@
       <tr *ngFor="let operation of recentOperations">
         <td class="text-center">
           <div class="badge bg-success">
-            <h6>{{operation.coinsymbol}}</h6>
+            <h6>{{ operation.coinsymbol }}</h6>
           </div>
         </td>
-        <td class="text-center">{{operation.coinamount}}</td>
+        <td class="text-center">{{ operation.coinamount }}</td>
         <td class="text-center">
           <strong>Birim Maliyet:</strong>
-          <span style="float: right">{{operation.buycost}}</span>
+          <span style="float: right">{{ operation.buycost }}</span>
           <br />
           <strong>Toplam Maliyet:</strong>
-          <span style="float: right">{{totalCostCalculate(operation.buycost, operation.coinamount)}}</span>
+          <span style="float: right">{{
+            totalCostCalculate(operation.buycost, operation.coinamount)
+          }}</span>
         </td>
         <td class="text-center">
           <strong>Birim Değer:</strong>
           <span style="float: right">5,205</span>
-          <br/>
+          <br />
           <strong>Toplam Değer:</strong>
-          <span style="float: right">{{totalValueCalculate(5.205, operation.coinamount)}}</span>
+          <span style="float: right">{{
+            totalValueCalculate(5.205, operation.coinamount)
+          }}</span>
         </td>
         <td class="text-center">
-          <span>${{pnlCalculate(operation.coinamount, operation.buycost, 5.205)}}</span>
-          <br/>
-          <span>%{{pnlCalculatePercent(operation.buycost, 5.205)}}</span>
+          <span
+            >${{
+              pnlCalculate(operation.coinamount, operation.buycost, 5.205)
+            }}</span
+          >
+          <br />
+          <span>%{{ pnlCalculatePercent(operation.buycost, 5.205) }}</span>
         </td>
         <td class="text-center">
           <div class="dropdown">
-            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button
+              class="btn btn-info dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
               İşlemler
             </button>
-            <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton">
-              
-                  <button type="button" class="btn bg-dark dropdown-item" data-toggle="modal" data-target="#sellCoin">
-                    sat
-                  </button>
-              
-              
-              
+            <div
+              class="dropdown-menu bg-dark"
+              aria-labelledby="dropdownMenuButton"
+            >
+              <button
+                type="button"
+                class="btn bg-dark dropdown-item"
+                data-toggle="modal"
+                data-target="#sellCoin"
+              >
+                sat
+              </button>
 
-              <a class="dropdown-item" (click)="deleteRecentOperation(operation)">Sil</a>
-              <a class="dropdown-item" >Güncelle</a>
+              <a
+                class="dropdown-item"
+                (click)="deleteRecentOperation(operation)"
+                >Sil</a
+              >
+              <a class="dropdown-item">Güncelle</a>
             </div>
           </div>
         </td>
@@ -73,26 +97,64 @@
 
 <!-- MODALS -->
 <div class="modal fade" tabindex="-1" role="dialog" id="operationAddModel">
-  <div class="modal-dialog modal-dialog-scrollable">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content bg-dark">
       <div class="modal-header">
-        <h4 class="modal-title">Portföye Coin Ekle</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Add Item</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-      <div class="modal-body container my-4">
-        
-        <select class="mdb-select md-form bg-dark" searchable="Search here..">
-          <option value="" disabled selected>Choose your country</option>
-          <option value="1">USA</option>
-          <option value="2">Germany</option>
-          <option value="3">France</option>
-          <option value="3">Poland</option>
-          <option value="3">Japan</option>
-        </select>
+      <div class="modal-body container my-4" >
+        <h1 class="h3 mb-3 font-weight-normal">Hangi Coini Aldığını Seçiniz</h1>
+        <ng-multiselect-dropdown
+          [placeholder]="'Coin Seçin'"
+          [settings]="dropdownSettings"
+          [data]="dropdownList"
+          [(ngModel)]="selectedItems"
+          (onSelect)="onItemSelect($event)"
+          class="bg-dark"
+        >
+        </ng-multiselect-dropdown>
+        <br>
+        <h1 class="h3 mb-3 font-weight-normal">Adet</h1>
+        <form [formGroup]="addCoinForm">
+          <div class="form-floating">
+            <input
+              formControlName="coinamount"
+              type="number"
+              class="form-control bg-dark"
+              id="floatingInput"
+              placeholder="Kaç adet aldığınızı giriniz."
+            />
+          </div>
+          <br />
+          <h1 class="h3 mb-3 font-weight-normal">Alış Fiyatı</h1>
+          <div class="form-floating">
+            <input
+              formControlName="buycost"
+              type="number"
+              class="form-control bg-dark"
+              id="floatingPassword"
+              placeholder="Hangi fiyattan aldığınızı seçiniz."
+            />
+          </div>
+        </form>
+
       </div>
+
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Değişiklikleri Kaydet</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          Kapat
+        </button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">
+          Değişiklikleri Kaydet
+        </button>
       </div>
     </div>
   </div>
@@ -103,17 +165,26 @@
     <div class="modal-content bg-dark">
       <div class="modal-header">
         <h4 class="modal-title">Satış Yap</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <div class="modal-body container my-4">
-        <div class="jumbotron bg-success">
-        </div>
+        <div class="jumbotron bg-success"></div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Satıldı olarak işaretle</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          Kapat
+        </button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">
+          Satıldı olarak işaretle
+        </button>
       </div>
     </div>
   </div>
 </div>
-

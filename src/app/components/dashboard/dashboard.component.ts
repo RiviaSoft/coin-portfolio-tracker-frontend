@@ -8,6 +8,14 @@ import { ResultModel } from 'src/app/models/resultModel';
 import { OperationsService } from 'src/app/services/operations.service';
 import { PnlService } from 'src/app/services/Pnl.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import {
+  FormGroup,
+  FormControl,
+  Validator,
+  FormBuilder,
+  Validators,
+} from '@angular/forms';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -16,20 +24,22 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 })
 export class DashboardComponent implements OnInit {
   recentOperations: RecentOperationModel[];
-  
+  addCoinForm: FormGroup;
   dropdownList:any = [];
   selectedItems:any = [];
-  dropdownSettings:IDropdownSettings
+  dropdownSettings:IDropdownSettings;
+
 
   constructor(
     private pnlService: PnlService,
     private operationsService: OperationsService,
-    private toastrService:ToastrService
+    private toastrService:ToastrService,
+    private formBuilder:FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.getRecentOperations();
-    
+
     this.dropdownList = [
       { item_id: 1, item_text: 'Mumbai' },
       { item_id: 2, item_text: 'Bangaluru' },
@@ -37,17 +47,14 @@ export class DashboardComponent implements OnInit {
       { item_id: 4, item_text: 'Navsari' },
       { item_id: 5, item_text: 'New Delhi' }
     ];
-    this.selectedItems = [
-      { item_id: 3, item_text: 'Pune' },
-      { item_id: 4, item_text: 'Navsari' }
-    ];
+
+    this.selectedItems = [];
+    
     this.dropdownSettings = {
       singleSelection: true,
       idField: 'item_id',
       textField: 'item_text',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 3,
+      itemsShowLimit: 5,
       allowSearchFilter: true
     }
   }
@@ -99,8 +106,11 @@ export class DashboardComponent implements OnInit {
     })
   }
   
-  test(){
-    console.log("adam")
+  createLoginForm() {
+    this.addCoinForm = this.formBuilder.group({
+      coinsymbol: ['', Validators.required],
+      coinamount: ['', Validators.required],
+      buycost: ['', Validators.required],
+    });
   }
-
 }
