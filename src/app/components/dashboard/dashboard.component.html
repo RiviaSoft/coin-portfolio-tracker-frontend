@@ -1,8 +1,12 @@
-<div class="mb-3 container-fluid">
-  <button type="button" class=" btn btn-primary btn-lg bg-dark " data-toggle="modal" data-target="#operationAddModel">
-    Coin Ekle
-  </button>
-</div>
+<ng-multiselect-dropdown
+  [placeholder]="'Coin Ekle'"
+  [settings]="dropdownSettings"
+  [data]="dropdownList"
+  [(ngModel)]="selectedItems"
+  (onSelect)="onItemSelect($event)"
+  class="bg-dark"
+>
+</ng-multiselect-dropdown>
 
 <div class="container-fluid">
   <table class="table">
@@ -51,14 +55,14 @@
             <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton">
               
                   <button type="button" class="btn bg-dark dropdown-item" data-toggle="modal" data-target="#sellCoin">
-                    Sat
+                    sat
                   </button>
               
               
               
 
-              <a class="dropdown-item btn" (click)="deleteRecentOperation(operation)">Sil</a>
-              <a class="dropdown-item btn" >Güncelle</a>
+              <a class="dropdown-item" (click)="deleteRecentOperation(operation)">Sil</a>
+              <a class="dropdown-item" >Güncelle</a>
             </div>
           </div>
         </td>
