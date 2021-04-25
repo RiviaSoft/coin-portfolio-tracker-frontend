@@ -15,7 +15,8 @@ import {
   FormBuilder,
   Validators,
 } from '@angular/forms';
-
+import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,42 +26,44 @@ import {
 export class DashboardComponent implements OnInit {
   recentOperations: RecentOperationModel[];
   addCoinForm: FormGroup;
-  dropdownList:any = [];
-  selectedItems:any = [];
-  dropdownSettings:IDropdownSettings;
-
+  dropdownList: any = [];
+  coinSymbolText: any;
+  coinsymbol: any;
+  dropdownSettings: IDropdownSettings;
 
   constructor(
     private pnlService: PnlService,
     private operationsService: OperationsService,
-    private toastrService:ToastrService,
-    private formBuilder:FormBuilder
+    private toastrService: ToastrService,
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
+    this.getCurrentUser();
     this.getRecentOperations();
-
+    this.createAddCoinForm();
     this.dropdownList = [
       { item_id: 1, item_text: 'Mumbai' },
       { item_id: 2, item_text: 'Bangaluru' },
       { item_id: 3, item_text: 'Pune' },
       { item_id: 4, item_text: 'Navsari' },
-      { item_id: 5, item_text: 'New Delhi' }
+      { item_id: 5, item_text: 'New Delhi' },
     ];
 
-    this.selectedItems = [];
-    
     this.dropdownSettings = {
       singleSelection: true,
       idField: 'item_id',
       textField: 'item_text',
       itemsShowLimit: 5,
-      allowSearchFilter: true
-    }
+      allowSearchFilter: true,
+    };
   }
 
-  onItemSelect(item: any) {
-    console.log(item);
+  setCoinSymbol(item: any) {
+    this.coinSymbolText = item.item_text;
+    console.log(this.coinSymbolText);
   }
 
   totalCostCalculate(amount: number, cost: number): number {
@@ -85,32 +88,60 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  getRecentOperationsById(id:number) {
-    this.operationsService.getRecentOperationById(id).subscribe((response) =>{
-      console.log(response)
-    })
+  getRecentOperationsById(id: number) {
+    this.operationsService.getRecentOperationById(id).subscribe((response) => {
+      console.log(response);
+    });
   }
 
-  deleteRecentOperation(operation:RecentOperationModel){
-    this.operationsService.deleteRecentOperation(operation).subscribe(response=>{
-      this.toastrService.success("İşlem silindi.", "Başarılı")
-      this.ngOnInit()
-    })
+  deleteRecentOperation(operation: RecentOperationModel) {
+    this.operationsService
+      .deleteRecentOperation(operation)
+      .subscribe((response) => {
+        this.toastrService.success('İşlem silindi.', 'Başarılı');
+        this.ngOnInit();
+      });
   }
 
-  addArchivedOperation(operation:RecentOperationModel){
-    this.operationsService.addArchivedOperation(operation).subscribe(response=>{ 
-      this.toastrService.success("Coin satıldı.", "Başarılı")
-      this.ngOnInit()
-      
-    })
+  addArchivedOperation(operation: RecentOperationModel) {
+    this.operationsService
+      .addArchivedOperation(operation)
+      .subscribe((response) => {
+        this.toastrService.success('Coin satıldı.', 'Başarılı');
+        this.ngOnInit();
+      });
   }
-  
-  createLoginForm() {
+
+  createAddCoinForm() {
     this.addCoinForm = this.formBuilder.group({
-      coinsymbol: ['', Validators.required],
+      userid:0,
+      coinsymbol:'',
       coinamount: ['', Validators.required],
       buycost: ['', Validators.required],
     });
+  }
+
+  getCurrentUser() {
+    this.userService.getUser().subscribe((response) => {
+      localStorage.setItem("id", response.id.toString())
+    });
+  }
+
+  addRecentOperation() {
+    
+    
+    if (this.addCoinForm.valid) {
+      let recentOperation = this.addCoinForm.value;
+      let idNumber:number = + localStorage.getItem("id")
+      recentOperation.userid = idNumber;
+      recentOperation.coinsymbol = this.coinSymbolText;
+      this.operationsService.addRecentOperation(recentOperation).subscribe((data) => {
+          this.toastrService.success("Coin Eklendi","Başarılı")
+        });
+    } else {
+      this.toastrService.error("Coin Eklenmedi","Başarısız")
+
+    }
+    
   }
 }

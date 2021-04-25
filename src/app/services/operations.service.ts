@@ -49,4 +49,9 @@ export class OperationsService {
     let newPath = this.apiUrl+"archivedoperations/delete"
     return this.httpClient.post<ResultModel>(newPath, ArchivedOperation)
   }
+
+  addRecentOperation(recentOperation:RecentOperationModel):Observable<ResultModel>{
+    let newPath = this.apiUrl + "operations/add"
+    return this.httpClient.post<ResultModel>(newPath, recentOperation)
+  }
 }

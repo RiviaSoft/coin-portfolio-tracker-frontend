@@ -111,13 +111,13 @@
         </button>
       </div>
       <div class="modal-body container my-4" >
-        <h1 class="h3 mb-3 font-weight-normal">Hangi Coini Aldığını Seçiniz</h1>
+        <h2 class="h3 mb-3 font-weight-normal">Hangi Coini Aldığını Seçiniz</h2>
         <ng-multiselect-dropdown
           [placeholder]="'Coin Seçin'"
           [settings]="dropdownSettings"
           [data]="dropdownList"
-          [(ngModel)]="selectedItems"
-          (onSelect)="onItemSelect($event)"
+          [(ngModel)]="coinsymbol"
+          (onSelect)="setCoinSymbol($event)"
           class="bg-dark"
         >
         </ng-multiselect-dropdown>
@@ -152,7 +152,7 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">
           Kapat
         </button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addRecentOperation()">
           Değişiklikleri Kaydet
         </button>
       </div>
