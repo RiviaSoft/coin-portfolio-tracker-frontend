@@ -171,19 +171,42 @@
         </button>
       </div>
       <div class="modal-body container my-4">
+
         <div class="jumbotron bg-success" >
           <p>Satacağınız Coin: {{selectedModal.coinsymbol}}</p> 
           <p>Elinizdeki Miktar: {{selectedModal.coinamount}}</p> 
           <p>Alış Fiyatı: {{selectedModal.buycost}}</p> 
           <p>Anlık Fiyat: 8.13</p>
-
         </div>
+
+        <form [formGroup]="addArchivedOperationForm">
+          <div class="form-group">
+            <input
+              formControlName="coinamount"
+              type="number"
+              class="form-control bg-dark"
+              id="floatingInput2"
+              placeholder="Satış Adedi:"
+            />
+          </div>
+          <br />
+          <div class="form-group">
+            <input
+              formControlName="sellcost"
+              type="number"
+              class="form-control bg-dark"
+              id="floatingInput3"
+              placeholder="Satış Fiyatı:"
+            />
+          </div>
+        </form>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">
           Kapat
         </button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addArchivedOperation(selectedModal)">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addArchivedOperation()">
           Satıldı olarak işaretle
         </button>
       </div>

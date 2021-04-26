@@ -17,6 +17,7 @@ import {
 } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import { ArchivedOperationModel } from 'src/app/models/archivedOperationModel';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,6 +27,7 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
   recentOperations: RecentOperationModel[];
   addCoinForm: FormGroup;
+  addArchivedOperationForm: FormGroup;
   dropdownList: any = [];
   coinSymbolText: any;
   coinsymbol: any;
@@ -46,6 +48,7 @@ export class DashboardComponent implements OnInit {
     this.getCurrentUser();
     this.getRecentOperations();
     this.createAddCoinForm();
+    this.createArchivedOperationForm()
     this.dropdownList = [
       { item_id: 1, item_text: 'BTCUSDT' },
       { item_id: 2, item_text: 'ETHUSDT' },
@@ -108,15 +111,6 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  addArchivedOperation(operation: RecentOperationModel) {
-    this.operationsService
-      .addArchivedOperation(operation)
-      .subscribe((response) => {
-        this.toastrService.success('Coin satıldı.', 'Başarılı');
-        this.ngOnInit();
-      });
-  }
-
   createAddCoinForm() {
     this.addCoinForm = this.formBuilder.group({
       userid:0,
@@ -126,15 +120,23 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  createArchivedOperationForm() {
+    this.addArchivedOperationForm = this.formBuilder.group({
+      userid:0,
+      buycost:0,
+      coinsymbol:'',
+      coinamount: ['', Validators.required],
+      sellcost: ['', Validators.required],
+    });
+  }
+
   getCurrentUser() {
     this.userService.getUser().subscribe((response) => {
       localStorage.setItem("id", response.id.toString())
     });
   }
 
-  addRecentOperation() {
-    
-    
+  addRecentOperation() {      
     if (this.addCoinForm.valid) {
       let recentOperation = this.addCoinForm.value;
       let idNumber:number = + localStorage.getItem("id")
@@ -146,8 +148,26 @@ export class DashboardComponent implements OnInit {
         });
     } else {
       this.toastrService.error("Coin Eklenmedi","Başarısız")
-
     }
-    
   }
+
+  addArchivedOperation(){
+    if (this.addArchivedOperationForm.valid) {
+      let archivedOperation:ArchivedOperationModel=this.addArchivedOperationForm.value
+      archivedOperation.coinsymbol=this.selectedModal.coinsymbol;
+      archivedOperation.buycost=this.selectedModal.buycost;
+      archivedOperation.userid=this.selectedModal.userid
+      
+      this.operationsService.addArchivedOperation(archivedOperation).subscribe(data=>{
+        this.toastrService.success("Coin Satıldı","Başarılı")
+        this.ngOnInit()
+      })
+    }
+    else{
+      this.toastrService.error("Coin Satılamadı","Başarısız")
+    }
+  }
+    
+
+
 }
