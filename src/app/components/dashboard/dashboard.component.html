@@ -77,16 +77,13 @@
                 class="btn bg-dark dropdown-item"
                 data-toggle="modal"
                 data-target="#sellCoin"
+                (click) = "setSelectedModal(operation)"
               >
-                sat
+                Sat
               </button>
 
-              <a
-                class="dropdown-item"
-                (click)="deleteRecentOperation(operation)"
-                >Sil</a
-              >
-              <a class="dropdown-item">Güncelle</a>
+              <a class="dropdown-item btn" (click)="deleteRecentOperation(operation)">Sil</a>
+              <a class="dropdown-item btn">Güncelle</a>
             </div>
           </div>
         </td>
@@ -118,8 +115,7 @@
           [data]="dropdownList"
           [(ngModel)]="coinsymbol"
           (onSelect)="setCoinSymbol($event)"
-          class="bg-dark"
-        >
+          class="bg-dark">
         </ng-multiselect-dropdown>
         <br>
         <h1 class="h3 mb-3 font-weight-normal">Adet</h1>
@@ -175,13 +171,19 @@
         </button>
       </div>
       <div class="modal-body container my-4">
-        <div class="jumbotron bg-success"></div>
+        <div class="jumbotron bg-success" >
+          <p>Satacağınız Coin: {{selectedModal.coinsymbol}}</p> 
+          <p>Elinizdeki Miktar: {{selectedModal.coinamount}}</p> 
+          <p>Alış Fiyatı: {{selectedModal.buycost}}</p> 
+          <p>Anlık Fiyat: 8.13</p>
+
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">
           Kapat
         </button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addArchivedOperation(selectedModal)">
           Satıldı olarak işaretle
         </button>
       </div>

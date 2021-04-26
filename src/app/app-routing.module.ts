@@ -14,9 +14,9 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { LoginGuardService } from './services/login-guard.service';
 
 const routes: Routes = [
-  {path : '',pathMatch: 'full', component:WelcomeComponent, children: [
+  {path : '', component:WelcomeComponent, children: [
     { path: '',pathMatch: 'full', component: LoginComponent },
-    { path: 'register',pathMatch: 'full', component: RegisterComponent }
+    { path: 'register', pathMatch: 'full', component: RegisterComponent }
   ]},
   {path:"home", component:HomeComponent,canActivate: [LoginGuardService], children: [
     {path : "dashboard", pathMatch: 'full', component:DashboardComponent, canActivate: [LoginGuardService]},

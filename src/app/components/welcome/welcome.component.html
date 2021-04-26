@@ -1,10 +1,11 @@
+
 <div class="row">
-  <div class="col-md-7 align-self-center">
-    <img src="./assets/coins.png" class="img-fluid" width="500" height="400">
+  <div class="col-md-7 d-flex justify-content-center align-items-center" >
+    <img src="./assets/coins.png" class="h-50">
   </div>
-  <div class="col-md-5 align-self-center">
-    <div class="container-sm">
-        <nav class="nav nav-pills justify-content-center" style="">
+  <div class="col-md-5 d-flex align-items-center justify-content-center bg-dark">
+    <div class="container-sm h-50">
+        <nav class="nav nav-pills justify-content-center" >
           <a [class]="getClass('login')" aria-current="page" (click)="setSelected('login')" routerLink="">Giriş Yap</a>
           <a [class]="getClass('register')" (click)="setSelected('register')" routerLink="register">Kayıt Ol</a>
         </nav>

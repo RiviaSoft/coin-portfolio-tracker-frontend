@@ -30,6 +30,8 @@ export class DashboardComponent implements OnInit {
   coinSymbolText: any;
   coinsymbol: any;
   dropdownSettings: IDropdownSettings;
+  selectedModal:RecentOperationModel={coinsymbol:"", coinamount:0, id:0, buycost:0, userid:0};
+
 
   constructor(
     private pnlService: PnlService,
@@ -45,11 +47,11 @@ export class DashboardComponent implements OnInit {
     this.getRecentOperations();
     this.createAddCoinForm();
     this.dropdownList = [
-      { item_id: 1, item_text: 'Mumbai' },
-      { item_id: 2, item_text: 'Bangaluru' },
-      { item_id: 3, item_text: 'Pune' },
-      { item_id: 4, item_text: 'Navsari' },
-      { item_id: 5, item_text: 'New Delhi' },
+      { item_id: 1, item_text: 'BTCUSDT' },
+      { item_id: 2, item_text: 'ETHUSDT' },
+      { item_id: 3, item_text: 'SXPUSDT' },
+      { item_id: 4, item_text: 'ONTUSDT' },
+      { item_id: 5, item_text: '1INCHUSDT' },
     ];
 
     this.dropdownSettings = {
@@ -61,9 +63,12 @@ export class DashboardComponent implements OnInit {
     };
   }
 
+  setSelectedModal(operation:RecentOperationModel){
+    this.selectedModal=operation
+  }
+
   setCoinSymbol(item: any) {
     this.coinSymbolText = item.item_text;
-    console.log(this.coinSymbolText);
   }
 
   totalCostCalculate(amount: number, cost: number): number {
@@ -137,6 +142,7 @@ export class DashboardComponent implements OnInit {
       recentOperation.coinsymbol = this.coinSymbolText;
       this.operationsService.addRecentOperation(recentOperation).subscribe((data) => {
           this.toastrService.success("Coin Eklendi","Başarılı")
+          this.ngOnInit()
         });
     } else {
       this.toastrService.error("Coin Eklenmedi","Başarısız")
