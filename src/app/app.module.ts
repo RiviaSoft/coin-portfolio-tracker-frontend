@@ -23,6 +23,8 @@ import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { RecentOperationFilterPipe } from './pipes/recent-operation-filter.pipe';
+import { ArchivedOperationFilterPipe } from './pipes/archived-operation-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     HomeComponent,
     RegisterComponent,
     WelcomeComponent,
+    RecentOperationFilterPipe,
+    ArchivedOperationFilterPipe,
   ],
   imports: [
     FormsModule,

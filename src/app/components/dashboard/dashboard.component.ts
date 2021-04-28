@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit {
   coinsymbol: any;
   dropdownSettings: IDropdownSettings;
   selectedModal:RecentOperationModel={coinsymbol:"", coinamount:0, id:0, buycost:0, userid:0};
-
+  filterText:string;
 
   constructor(
     private pnlService: PnlService,
