@@ -1,5 +1,13 @@
 <div class="container-fluid">
-
+    <div class="mb-4">
+      <input
+      type="text"
+      [(ngModel)]="filterText"
+      class="form-control bg-dark rounded"
+      id="searchRecentOperation"
+      placeholder="Aramak istediğiniz coin"
+    />
+    </div>
   
     <table class="table">
       <thead>
@@ -13,7 +21,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let archivedOperation of archivedOperations">
+        <tr *ngFor="let archivedOperation of archivedOperations | archivedOperationFilter : filterText">
           <td class="text-center">
             <div class="badge bg-success">
               <h6>{{archivedOperation.coinsymbol}}</h6>

@@ -45,8 +45,8 @@ export class RegisterComponent implements OnInit {
     if(this.registerForm.valid){
       let registerModel = this.registerForm.value
       this.authService.register(registerModel).subscribe(data => {
-        this.toastrService.success("Lütfen Giriş Yapın", "Başarılı!")
-        this.routerService.navigate(["login"])
+        this.toastrService.success("Lütfen email ve şifrenizi kullanarak giriş yapın", "Kayıt Başarılı!")
+        this.routerService.navigate([""])
       }, responseError=>{
         this.toastrService.error("Kayıt Başarısız!", "Hata")
       })

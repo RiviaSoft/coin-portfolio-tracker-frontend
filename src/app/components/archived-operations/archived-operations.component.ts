@@ -11,7 +11,7 @@ import { PnlService } from 'src/app/services/Pnl.service';
 })
 export class ArchivedOperationsComponent implements OnInit {
   archivedOperations: ArchivedOperationModel[];
-
+  filterText:string;
   constructor(
     private pnlService: PnlService,
     private operationsService: OperationsService,
