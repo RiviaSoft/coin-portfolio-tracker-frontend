@@ -18,6 +18,8 @@ import {
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { ArchivedOperationModel } from 'src/app/models/archivedOperationModel';
+import { BinanceServiceService } from 'src/app/services/binance-service.service';
+import { coinPairs } from 'src/app/models/coinPairs';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,6 +33,7 @@ export class DashboardComponent implements OnInit {
   dropdownList: any = [];
   coinSymbolText: any;
   coinsymbol: any;
+  coinPairs:coinPairs[];
   dropdownSettings: IDropdownSettings;
   selectedModal:RecentOperationModel={coinsymbol:"", coinamount:0, id:0, buycost:0, userid:0};
 
@@ -38,6 +41,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private pnlService: PnlService,
     private operationsService: OperationsService,
+    private binanceService:BinanceServiceService,
     private toastrService: ToastrService,
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -45,17 +49,11 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getCoinPairs();
     this.getCurrentUser();
     this.getRecentOperations();
     this.createAddCoinForm();
     this.createArchivedOperationForm()
-    this.dropdownList = [
-      { item_id: 1, item_text: 'BTCUSDT' },
-      { item_id: 2, item_text: 'ETHUSDT' },
-      { item_id: 3, item_text: 'SXPUSDT' },
-      { item_id: 4, item_text: 'ONTUSDT' },
-      { item_id: 5, item_text: '1INCHUSDT' },
-    ];
 
     this.dropdownSettings = {
       singleSelection: true,
@@ -168,6 +166,12 @@ export class DashboardComponent implements OnInit {
     }
   }
     
+  getCoinPairs(){
+    this.binanceService.getCoins().then(data => {
+      this.coinPairs=data
+    }); 
+
+  }
 
 
 }

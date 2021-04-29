@@ -112,7 +112,7 @@
         <ng-multiselect-dropdown
           [placeholder]="'Coin Seçin'"
           [settings]="dropdownSettings"
-          [data]="dropdownList"
+          [data]="coinPairs"
           [(ngModel)]="coinsymbol"
           (onSelect)="setCoinSymbol($event)"
           class="bg-dark">
