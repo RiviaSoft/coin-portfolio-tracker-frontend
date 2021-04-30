@@ -70,7 +70,7 @@ export class DashboardComponent implements OnInit {
   }
 
   setCoinSymbol(item: any) {
-    this.coinSymbolText = item.item_text;
+    this.coinSymbolText = item;
   }
 
   totalCostCalculate(amount: number, cost: number): number {
