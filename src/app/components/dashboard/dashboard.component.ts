@@ -62,6 +62,7 @@ export class DashboardComponent implements OnInit {
       textField: 'item_text',
       itemsShowLimit: 5,
       allowSearchFilter: true,
+      closeDropDownOnSelection:true
     };
   }
 
