@@ -33,7 +33,8 @@ export class DashboardComponent implements OnInit {
   dropdownList: any = [];
   coinSymbolText: any;
   coinsymbol: any;
-  coinPairs:coinPairs[];
+  coinPairs:string[];
+  coinPairs2:string[];
   dropdownSettings: IDropdownSettings;
   selectedModal:RecentOperationModel={coinsymbol:"", coinamount:0, id:0, buycost:0, userid:0};
   filterText:string;
@@ -167,9 +168,7 @@ export class DashboardComponent implements OnInit {
   }
     
   getCoinPairs(){
-    this.binanceService.getCoins().then(data => {
-      this.coinPairs=data
-    }); 
+    this.coinPairs =  this.binanceService.getCoinPairs()
 
   }
 

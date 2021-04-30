@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { coinPairs } from '../models/coinPairs';
-//import coins from 'src/assets/coins.json'
+import coins from 'src/assets/coins.json';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,12 @@ export class BinanceServiceService {
     private httpclient:HttpClient
   ) {}
 
-  
-  
+  coinPairs:string[]
+  getCoinPairs(){
+    this.coinPairs = coins
+    return this.coinPairs
+  }
+
   async getCoins(){
   
     let symbols:coinPairs []=[]
