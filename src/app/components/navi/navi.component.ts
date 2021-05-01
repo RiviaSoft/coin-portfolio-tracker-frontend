@@ -28,11 +28,20 @@ export class NaviComponent implements OnInit {
       this.currentUser = data;
       if(data.name != undefined){
         this.isLogin = true;
+      }else{
+        this.logOut();
       }
     })
   }
   updateProfile(){
     this.toastrService.info("Yakında...")
+  }
+
+  //değiştirilecek
+  login(){
+    localStorage.removeItem("token")
+    localStorage.removeItem("id")
+    this.router.navigate([""]);
   }
 
   logOut(){
