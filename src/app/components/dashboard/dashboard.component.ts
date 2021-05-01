@@ -50,10 +50,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   
 
   ngOnInit(): void {
-    this.binanceService.openWebSocket("btcusdt");
     this.getCoinPairs();
     this.getCurrentUser();
     this.getRecentOperations();
+    this.recentOperations.forEach()
     this.createAddCoinForm();
     this.createArchivedOperationForm();
     this.dropdownSettings = {

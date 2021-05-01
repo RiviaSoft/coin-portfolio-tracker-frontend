@@ -54,21 +54,21 @@
         </td>
         <td class="text-center">
           <strong>Birim Değer:</strong>
-          <span style="float: right">{{binanceService.price}}</span>
+          <span style="float: right">{{binanceService.prices.get(operation.coinsymbol.toLowerCase())}}</span>
           <br />
           <strong>Toplam Değer:</strong>
           <span style="float: right">{{
-            totalValueCalculate(binanceService.price, operation.coinamount)
+            totalValueCalculate(binanceService.prices.get(operation.coinsymbol.toLowerCase()), operation.coinamount)
           }}</span>
         </td>
         <td class="text-center">
           <span
             >${{
-              pnlCalculate(operation.coinamount, operation.buycost, binanceService.price)
+              pnlCalculate(operation.coinamount, operation.buycost, binanceService.prices.get(operation.coinsymbol.toLowerCase()))
             }}</span
           >
           <br />
-          <span>%{{ pnlCalculatePercent(operation.buycost, binanceService.price) }}</span>
+          <span>%{{ pnlCalculatePercent(operation.buycost, binanceService.prices.get(operation.coinsymbol.toLowerCase())) }}</span>
         </td>
         <td class="text-center">
           <div class="dropdown">
