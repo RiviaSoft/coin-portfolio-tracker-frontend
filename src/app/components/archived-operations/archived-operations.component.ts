@@ -46,7 +46,6 @@ export class ArchivedOperationsComponent implements OnInit {
 
   deleteArchivedOperation(archivedOperation:ArchivedOperationModel){
     this.operationsService.deleteArchivedOperation(archivedOperation).subscribe(response =>{
-      console.log(response)
       this.toatrService.success("Arşivlenmiş işlem silindi.", "Başarılı")
       this.ngOnInit();
     })

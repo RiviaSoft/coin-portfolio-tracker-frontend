@@ -10,6 +10,10 @@ import coinPairs from 'src/assets/coinPairs.json';
 
 export class BinanceServiceService {
 
+  price:number
+  webSocket:WebSocket
+
+
   constructor(
     private httpclient:HttpClient
   ) {}
@@ -21,6 +25,41 @@ export class BinanceServiceService {
     });
     return this.coinPairsList
   }
+
+  openWebSocket(coinsymbol:string){
+    this.webSocket = new WebSocket("wss://stream.binance.com:9443/ws/"+coinsymbol.toLowerCase()+"@miniTicker");
+    
+    this.webSocket.onopen = (event)=>{
+      console.log(event)
+    }
+
+    this.webSocket.onmessage = (event)=>{
+      let stringPrice = JSON.parse(event.data).c
+      this.price = +stringPrice
+    }
+
+    this.webSocket.onclose = (event)=>{
+      console.log(event)
+    }
+  }
+
+  closeWebSocket(){
+    this.webSocket.close()
+  }
+
+  // getPrice(){
+  //   let socket = new WebSocket("wss://stream.binance.com:9443/ws/btcusdt@miniTicker");
+  //   let currentPrice
+  //   socket.onopen = function(e) {
+  //     socket.onmessage = function(event) {
+  //       let miniTicker = JSON.parse(event.data)
+  //       currentPrice = miniTicker.c
+  //     };
+  //   };
+
+  // }
+
+ 
 
   // async getCoins(){
   

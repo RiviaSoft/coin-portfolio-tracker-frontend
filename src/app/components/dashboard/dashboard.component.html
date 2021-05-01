@@ -54,21 +54,21 @@
         </td>
         <td class="text-center">
           <strong>Birim Değer:</strong>
-          <span style="float: right">5,205</span>
+          <span style="float: right">{{binanceService.price}}</span>
           <br />
           <strong>Toplam Değer:</strong>
           <span style="float: right">{{
-            totalValueCalculate(5.205, operation.coinamount)
+            totalValueCalculate(binanceService.price, operation.coinamount)
           }}</span>
         </td>
         <td class="text-center">
           <span
             >${{
-              pnlCalculate(operation.coinamount, operation.buycost, 5.205)
+              pnlCalculate(operation.coinamount, operation.buycost, binanceService.price)
             }}</span
           >
           <br />
-          <span>%{{ pnlCalculatePercent(operation.buycost, 5.205) }}</span>
+          <span>%{{ pnlCalculatePercent(operation.buycost, binanceService.price) }}</span>
         </td>
         <td class="text-center">
           <div class="dropdown">
@@ -133,7 +133,7 @@
           [data]="coinPairs"
           [(ngModel)]="coinsymbol"
           (onSelect)="setCoinSymbol($event)"
-          class="bg-dark"
+          class=" text-black"
         >
         </ng-multiselect-dropdown>
         <br />

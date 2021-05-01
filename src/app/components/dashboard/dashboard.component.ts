@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
@@ -26,7 +26,7 @@ import { coinPairs } from 'src/app/models/coinPairs';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   recentOperations: RecentOperationModel[];
   addCoinForm: FormGroup;
   addArchivedOperationForm: FormGroup;
@@ -42,20 +42,20 @@ export class DashboardComponent implements OnInit {
   constructor(
     private pnlService: PnlService,
     private operationsService: OperationsService,
-    private binanceService:BinanceServiceService,
+    public binanceService:BinanceServiceService,
     private toastrService: ToastrService,
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private router:Router
   ) {}
+  
 
   ngOnInit(): void {
+    this.binanceService.openWebSocket("btcusdt");
     this.getCoinPairs();
     this.getCurrentUser();
     this.getRecentOperations();
     this.createAddCoinForm();
-    this.createArchivedOperationForm()
-
+    this.createArchivedOperationForm();
     this.dropdownSettings = {
       singleSelection: true,
       idField: 'item_id',
@@ -64,6 +64,10 @@ export class DashboardComponent implements OnInit {
       allowSearchFilter: true,
       closeDropDownOnSelection:true
     };
+  }
+
+  ngOnDestroy(): void {
+    this.binanceService.closeWebSocket()
   }
 
   setSelectedModal(operation:RecentOperationModel){
@@ -79,7 +83,9 @@ export class DashboardComponent implements OnInit {
   }
 
   totalValueCalculate(amount: number, price: number): number {
-    return amount * price;
+    let stringValue = (amount * price).toFixed(2);
+    let totalValue= +stringValue
+    return totalValue 
   }
 
   pnlCalculate(amount: number, cost: number, price: number): number {
@@ -98,7 +104,6 @@ export class DashboardComponent implements OnInit {
 
   getRecentOperationsById(id: number) {
     this.operationsService.getRecentOperationById(id).subscribe((response) => {
-      console.log(response);
     });
   }
 
@@ -171,6 +176,10 @@ export class DashboardComponent implements OnInit {
   getCoinPairs(){
     this.coinPairs =  this.binanceService.getCoinPairs()
 
+  }
+
+  getPrice(coinSymbol:string){
+    this.binanceService.openWebSocket(coinSymbol)
   }
 
 

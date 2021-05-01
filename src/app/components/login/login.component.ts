@@ -20,6 +20,8 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
   token:string;
   loginForm: FormGroup;
+
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -29,11 +31,15 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.createLoginForm();
-    if(this.authService.isAuthenticated()){
-      this.routerService.navigate(["home/dashboard"])
-    }else {
-      this.routerService.navigate([""])
-    }
+    this.authService.isAuthenticated().then((result)=>{
+      console.log(result)
+      if(result){
+        this.routerService.navigate(["home/dashboard"])
+      }else {
+        this.routerService.navigate([""])
+      }
+    })
+    
   }
 
   createLoginForm() {
