@@ -28,7 +28,6 @@ export class BinanceServiceService {
     this.webSocket = new WebSocket("wss://stream.binance.com:9443/ws/"+coinsymbol.toLowerCase()+"@miniTicker");
     
     this.webSocket.onopen = (event)=>{
-      console.log(event)
     }
 
     this.webSocket.onmessage = (event)=>{
@@ -37,7 +36,6 @@ export class BinanceServiceService {
     }
 
     this.webSocket.onclose = (event)=>{
-      console.log(event)
     }
   }
 

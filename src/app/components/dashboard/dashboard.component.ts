@@ -26,7 +26,7 @@ import { coinPairs } from 'src/app/models/coinPairs';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit {
   recentOperations: RecentOperationModel[];
   addCoinForm: FormGroup;
   addArchivedOperationForm: FormGroup;
@@ -52,8 +52,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getCoinPairs();
     this.getCurrentUser();
+    
     this.getRecentOperations();
-    this.recentOperations.forEach()
+    setTimeout(() => {
+      this.getCoinPrice();
+    }, 1200);
+    
     this.createAddCoinForm();
     this.createArchivedOperationForm();
     this.dropdownSettings = {
@@ -66,8 +70,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     };
   }
 
-  ngOnDestroy(): void {
-    this.binanceService.closeWebSocket()
+  getCoinPrice(){
+    this.recentOperations.forEach(element => {
+      this.binanceService.openWebSocket(element.coinsymbol.toLowerCase());
+    });
   }
 
   setSelectedModal(operation:RecentOperationModel){
@@ -182,5 +188,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.binanceService.openWebSocket(coinSymbol)
   }
 
+  deneme(){
+    let people = { 
+    id: 4 ,
+    firstName: 'John'
+  };
+
+  }
 
 }

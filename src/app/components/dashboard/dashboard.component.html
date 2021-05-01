@@ -44,24 +44,31 @@
         </td>
         <td class="text-center">{{ operation.coinamount }}</td>
         <td class="text-center">
-          <strong>Birim Maliyet:</strong>
-          <span style="float: right">{{ operation.buycost }}</span>
-          <br />
-          <strong>Toplam Maliyet:</strong>
-          <span style="float: right">{{
-            totalCostCalculate(operation.buycost, operation.coinamount)
-          }}</span>
+          <div class="d-flex justify-content-between px-4">
+            <strong>Birim Maliyet:</strong>
+            <span style="float: right">{{ operation.buycost }}</span>
+          </div>
+          <div class="d-flex justify-content-between px-4">
+            <strong>Toplam Maliyet:</strong>
+            <span style="float: right">{{
+              totalCostCalculate(operation.buycost, operation.coinamount)
+            }}</span>
+          </div>
+            
         </td>
-        <td class="text-center">
-          <strong>Birim Değer:</strong>
-          <span style="float: right">{{binanceService.prices.get(operation.coinsymbol.toLowerCase())}}</span>
-          <br />
-          <strong>Toplam Değer:</strong>
-          <span style="float: right">{{
-            totalValueCalculate(binanceService.prices.get(operation.coinsymbol.toLowerCase()), operation.coinamount)
-          }}</span>
+        <td class="text-center w-25">
+          <div class="d-flex justify-content-between px-4">
+            <strong>Birim Değer:</strong>
+            <span>{{binanceService.prices.get(operation.coinsymbol.toLowerCase())}}</span>
+          </div>
+          <div class="d-flex justify-content-between px-4">
+            <strong>Toplam Değer:</strong>
+            <span>{{
+              totalValueCalculate(binanceService.prices.get(operation.coinsymbol.toLowerCase()), operation.coinamount)
+            }}</span>
+          </div>
         </td>
-        <td class="text-center">
+        <td class="text-center w-25">
           <span
             >${{
               pnlCalculate(operation.coinamount, operation.buycost, binanceService.prices.get(operation.coinsymbol.toLowerCase()))
