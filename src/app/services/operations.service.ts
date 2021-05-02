@@ -24,7 +24,7 @@ export class OperationsService {
   }
 
   getRecentOperationById(id:number):Observable<RecentOperationModel>{
-    let newPath = this.apiUrl + "/operations/get/id:" + id
+    let newPath = this.apiUrl + "operations/get/id:" + id
     return this.httpClient.get<RecentOperationModel>(newPath)
   }
 
