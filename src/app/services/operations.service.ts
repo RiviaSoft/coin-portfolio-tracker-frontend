@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { RecentOperationModel } from '../models/recentOperationModel';
 import { ArchivedOperationModel } from '../models/archivedOperationModel';
 import { ResultModel } from '../models/resultModel';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +13,7 @@ export class OperationsService {
   recentOperationsModel:RecentOperationModel[];
   archivedOperationsModel:ArchivedOperationModel[];
 
-  apiUrl:string="http://127.0.0.1:8000/api/"
+  apiUrl:string= environment.apiUrl + "/api/"
   
 
   constructor(private httpClient:HttpClient) { }
