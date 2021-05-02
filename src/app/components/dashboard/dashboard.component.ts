@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { RecentOperationModel } from 'src/app/models/recentOperationModel';
 import { ResultModel } from 'src/app/models/resultModel';
 import { OperationsService } from 'src/app/services/operations.service';
-import { PnlService } from 'src/app/services/Pnl.service';
+import { PnlService } from 'src/app/services/pnl.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import {
   FormGroup,
@@ -187,13 +187,4 @@ export class DashboardComponent implements OnInit {
   getPrice(coinSymbol:string){
     this.binanceService.openWebSocket(coinSymbol)
   }
-
-  deneme(){
-    let people = { 
-    id: 4 ,
-    firstName: 'John'
-  };
-
-  }
-
 }

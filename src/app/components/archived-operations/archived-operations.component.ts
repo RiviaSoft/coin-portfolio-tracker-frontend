@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ArchivedOperationModel } from 'src/app/models/archivedOperationModel';
 import { OperationsService } from 'src/app/services/operations.service';
-import { PnlService } from 'src/app/services/Pnl.service';
+import { PnlService } from 'src/app/services/pnl.service';
 
 @Component({
   selector: 'app-archived-operations',

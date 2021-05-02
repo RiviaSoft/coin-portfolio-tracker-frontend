@@ -2,22 +2,22 @@
   <div class="row mb-4">
     <div class="col-md-2 w-100">
       <button
-      type="button"
-      class="btn btn-primary "
-      data-toggle="modal"
-      data-target="#operationAddModel"
-    >
-      Coin Ekle
-    </button>
+        type="button"
+        class="btn btn-primary"
+        data-toggle="modal"
+        data-target="#operationAddModel"
+      >
+        Coin Ekle
+      </button>
     </div>
     <div class="col-md-10">
       <input
-      type="text"
-      [(ngModel)]="filterText"
-      class="form-control bg-dark rounded"
-      id="searchRecentOperation"
-      placeholder="Aramak istediğiniz coin"
-    />
+        type="text"
+        [(ngModel)]="filterText"
+        class="form-control bg-dark rounded"
+        id="searchRecentOperation"
+        placeholder="Aramak istediğiniz coin"
+      />
     </div>
   </div>
   <table class="table">
@@ -54,28 +54,43 @@
               totalCostCalculate(operation.buycost, operation.coinamount)
             }}</span>
           </div>
-            
         </td>
         <td class="text-center w-25">
           <div class="d-flex justify-content-between px-4">
             <strong>Birim Değer:</strong>
-            <span>{{binanceService.prices.get(operation.coinsymbol.toLowerCase())}}</span>
+            <span>{{
+              binanceService.prices.get(operation.coinsymbol.toLowerCase())
+            }}</span>
           </div>
           <div class="d-flex justify-content-between px-4">
             <strong>Toplam Değer:</strong>
             <span>{{
-              totalValueCalculate(binanceService.prices.get(operation.coinsymbol.toLowerCase()), operation.coinamount)
+              totalValueCalculate(
+                binanceService.prices.get(operation.coinsymbol.toLowerCase()),
+                operation.coinamount
+              )
             }}</span>
           </div>
         </td>
         <td class="text-center w-25">
           <span
             >${{
-              pnlCalculate(operation.coinamount, operation.buycost, binanceService.prices.get(operation.coinsymbol.toLowerCase()))
+              pnlCalculate(
+                operation.coinamount,
+                operation.buycost,
+                binanceService.prices.get(operation.coinsymbol.toLowerCase())
+              )
             }}</span
           >
           <br />
-          <span>%{{ pnlCalculatePercent(operation.buycost, binanceService.prices.get(operation.coinsymbol.toLowerCase())) }}</span>
+          <span
+            >%{{
+              pnlCalculatePercent(
+                operation.buycost,
+                binanceService.prices.get(operation.coinsymbol.toLowerCase())
+              )
+            }}</span
+          >
         </td>
         <td class="text-center">
           <div class="dropdown">
@@ -106,8 +121,9 @@
               <button
                 class="dropdown-item btn bg-dark"
                 (click)="deleteRecentOperation(operation)"
-                >Sil</button
               >
+                Sil
+              </button>
               <button class="dropdown-item btn bg-dark">Güncelle</button>
             </div>
           </div>
@@ -140,7 +156,7 @@
           [data]="coinPairs"
           [(ngModel)]="coinsymbol"
           (onSelect)="setCoinSymbol($event)"
-          class=" text-black"
+          class="text-black"
         >
         </ng-multiselect-dropdown>
         <br />
@@ -229,7 +245,6 @@
             />
           </div>
         </form>
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">

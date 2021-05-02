@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class PnlService {
 
   constructor() { }
-
+  
   profitLoss(amount:number, cost:number, price:number):number{
     let pnl:number = (amount*price)-(amount*cost)
     let pnls:string = pnl.toFixed(2)

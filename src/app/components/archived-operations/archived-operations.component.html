@@ -1,68 +1,110 @@
 <div class="container-fluid">
-    <div class="mb-4">
-      <input
+  <div class="mb-4">
+    <input
       type="text"
       [(ngModel)]="filterText"
       class="form-control bg-dark rounded"
       id="searchRecentOperation"
       placeholder="Aramak istediğiniz coin"
     />
-    </div>
-  
-    <table class="table">
-      <thead>
-        <tr>
-          <th class="text-center">Sembol</th>
-          <th class="text-center">Adet</th>
-          <th class="text-center">Alış</th>
-          <th class="text-center">Satış</th>
-          <th class="text-center">Kâr/Zarar</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let archivedOperation of archivedOperations | archivedOperationFilter : filterText">
-          <td class="text-center">
-            <div class="badge bg-success">
-              <h6>{{archivedOperation.coinsymbol}}</h6>
-            </div>
-          </td>
-          <td class="text-center">{{archivedOperation.coinamount}}</td>
-          <td class="text-center">
-            <strong>Birim Maliyet:</strong>
-            <span style="float: right">{{archivedOperation.buycost}}</span>
-            <br />
-            <strong>Toplam Maliyet:</strong>
-            <span style="float: right">{{totalCostCalculate(archivedOperation.buycost, archivedOperation.coinamount)}}</span>
-          </td>
-          <td class="text-center">
-            <strong>Birim Değer:</strong>
-            <span style="float: right">{{archivedOperation.sellcost}}</span>
-            <br/>
-            <strong>Toplam Değer:</strong>
-            <span style="float: right">{{totalValueCalculate(archivedOperation.sellcost, archivedOperation.coinamount)}}</span>
-          </td>
-          <td class="text-center">
-            <span>${{pnlCalculate(archivedOperation.coinamount, archivedOperation.buycost, archivedOperation.sellcost)}}</span>
-          <br/>
-          <span>%{{pnlCalculatePercent(archivedOperation.buycost, archivedOperation.sellcost)}}</span>
-          </td>
-          <td class="text-center">
-            <div class="dropdown">
-              <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                İşlemler
-              </button>
-              <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" routerLink="/archivedops" (click)="deleteArchivedOperation(archivedOperation) ">Sil</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
   </div>
-  
-  
-  
-  
-  
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="text-center">Sembol</th>
+        <th class="text-center">Adet</th>
+        <th class="text-center">Alış</th>
+        <th class="text-center">Satış</th>
+        <th class="text-center">Kâr/Zarar</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let archivedOperation of archivedOperations
+            | archivedOperationFilter: filterText
+        "
+      >
+        <td class="text-center">
+          <div class="badge bg-success">
+            <h6>{{ archivedOperation.coinsymbol }}</h6>
+          </div>
+        </td>
+        <td class="text-center">{{ archivedOperation.coinamount }}</td>
+        <td class="text-center">
+          <strong>Birim Maliyet:</strong>
+          <span style="float: right">{{ archivedOperation.buycost }}</span>
+          <br />
+          <strong>Toplam Maliyet:</strong>
+          <span style="float: right">{{
+            totalCostCalculate(
+              archivedOperation.buycost,
+              archivedOperation.coinamount
+            )
+          }}</span>
+        </td>
+        <td class="text-center">
+          <strong>Birim Değer:</strong>
+          <span style="float: right">{{ archivedOperation.sellcost }}</span>
+          <br />
+          <strong>Toplam Değer:</strong>
+          <span style="float: right">{{
+            totalValueCalculate(
+              archivedOperation.sellcost,
+              archivedOperation.coinamount
+            )
+          }}</span>
+        </td>
+        <td class="text-center">
+          <span
+            >$
+            {{
+              pnlCalculate(
+                archivedOperation.coinamount,
+                archivedOperation.buycost,
+                archivedOperation.sellcost
+              )
+            }}</span
+          >
+          <br />
+          <span
+            >%
+            {{
+              pnlCalculatePercent(
+                archivedOperation.buycost,
+                archivedOperation.sellcost
+              )
+            }}</span
+          >
+        </td>
+        <td class="text-center">
+          <div class="dropdown">
+            <button
+              class="btn btn-info dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              İşlemler
+            </button>
+            <div
+              class="dropdown-menu bg-dark"
+              aria-labelledby="dropdownMenuButton"
+            >
+              <a
+                class="dropdown-item"
+                routerLink="/archivedops"
+                (click)="deleteArchivedOperation(archivedOperation)"
+                >Sil</a
+              >
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
