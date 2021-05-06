@@ -27,7 +27,7 @@ import { coinPairs } from 'src/app/models/coinPairs';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  recentOperations: RecentOperationModel[];
+  recentOperations: RecentOperationModel[] = [];
   addCoinForm: FormGroup;
   addArchivedOperationForm: FormGroup;
   dropdownList: any = [];

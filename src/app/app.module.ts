@@ -25,6 +25,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { RecentOperationFilterPipe } from './pipes/recent-operation-filter.pipe';
 import { ArchivedOperationFilterPipe } from './pipes/archived-operation-filter.pipe';
+import { WalletDetailComponent } from './components/wallet-detail/wallet-detail.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ArchivedOperationFilterPipe } from './pipes/archived-operation-filter.p
     WelcomeComponent,
     RecentOperationFilterPipe,
     ArchivedOperationFilterPipe,
+    WalletDetailComponent,
   ],
   imports: [
     FormsModule,
