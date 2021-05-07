@@ -21,5 +21,11 @@ export class PnlService {
     return pnl
   }
 
+  totalCostCalculate(amount: number, cost: number): number {
+    let totalCost:number= amount * cost;
+    let totalCosts:string = totalCost.toFixed(2)
+    totalCost = +totalCosts
+    return totalCost
+  }
 
 }

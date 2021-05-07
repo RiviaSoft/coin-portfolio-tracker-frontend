@@ -13,7 +13,7 @@
               Bu cüzdan {{wallet.name}}'dir
             </div>
             
-            <button type="button" class="btn btn-outline-danger"> Cüzdanı Sil </button>
+            <button type="button" class="btn btn-outline-danger" (click)="deleteWallet(wallet)" (click)="refresh()"> Cüzdanı Sil </button>
           </div>
 
     </div>
@@ -34,30 +34,35 @@
 
         <div class="modal-body container my-4">
           Coini Seçin
-          
-          <ng-multiselect-dropdown
+
+          <form [formGroup]="addWalletForm">
+            <br />
+            <h1 class="h3 mb-3 font-weight-normal">Cüzdan İsmi</h1>
+            <div class="form-floating">
+              <input
+                formControlName="name"
+                type="text"
+                class="form-control bg-dark"
+                id="walletName"
+                placeholder="Cüzdanınıza İsim Veriniz"
+              />
+            </div>
+          </form>
+
+          <!-- <ng-multiselect-dropdown
           [placeholder]="'Coinleri Seçin'"
           [settings]="dropdownSettings"
           [data]="recentOperations"
-          [(ngModel)]="selectedOperationIds"
+          [(ngModel)]="coinsymbol"
           (onSelect)="addCoin2Wallet($event)"
           class="text-black"
         >
-        </ng-multiselect-dropdown>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+        </ng-multiselect-dropdown> -->
+        <br><br><br>
         </div>
   
         <div class="modal-footer">
-            <button type="button" class="btn btn-outline-success">Coini Cüzdana Ekle</button>
+            <button type="button" class="btn btn-outline-success" (click)="addWallet()" (click)="refresh()">Coini Cüzdana Ekle</button>
         </div>
 
       </div>

@@ -1,25 +1,17 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
 import { RecentOperationModel } from 'src/app/models/recentOperationModel';
-import { ResultModel } from 'src/app/models/resultModel';
 import { OperationsService } from 'src/app/services/operations.service';
 import { PnlService } from 'src/app/services/pnl.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import {
   FormGroup,
-  FormControl,
-  Validator,
   FormBuilder,
   Validators,
 } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
-import { Router } from '@angular/router';
 import { ArchivedOperationModel } from 'src/app/models/archivedOperationModel';
 import { BinanceServiceService } from 'src/app/services/binance-service.service';
-import { coinPairs } from 'src/app/models/coinPairs';
 
 @Component({
   selector: 'app-dashboard',
@@ -33,8 +25,7 @@ export class DashboardComponent implements OnInit {
   dropdownList: any = [];
   coinSymbolText: any;
   coinsymbol: any;
-  coinPairs:string[];
-  coinPairs2:string[];
+  coinPairsList:string[];
   dropdownSettings: IDropdownSettings;
   selectedModal:RecentOperationModel={coinsymbol:"", coinamount:0, id:0, buycost:0, userid:0};
   filterText:string;
@@ -50,7 +41,6 @@ export class DashboardComponent implements OnInit {
   
 
   ngOnInit(): void {
-    this.getCoinPairs();
     this.getCurrentUser();
     
     this.getRecentOperations();
@@ -62,7 +52,6 @@ export class DashboardComponent implements OnInit {
     this.createArchivedOperationForm();
     this.dropdownSettings = {
       singleSelection: true,
-      idField: 'item_id',
       textField: 'item_text',
       itemsShowLimit: 5,
       allowSearchFilter: true,
@@ -84,8 +73,8 @@ export class DashboardComponent implements OnInit {
     this.coinSymbolText = item;
   }
 
-  totalCostCalculate(amount: number, cost: number): number {
-    return amount * cost;
+  totalCostCalculate(amount: number, cost: number){
+    return this.pnlService.totalCostCalculate(amount, cost)
   }
 
   totalValueCalculate(amount: number, price: number): number {
@@ -180,7 +169,8 @@ export class DashboardComponent implements OnInit {
   }
     
   getCoinPairs(){
-    this.coinPairs =  this.binanceService.getCoinPairs()
+    this.coinPairsList = []
+    this.coinPairsList =  this.binanceService.getCoinPairs()
 
   }
 

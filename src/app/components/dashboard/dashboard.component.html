@@ -6,6 +6,7 @@
         class="btn btn-primary"
         data-toggle="modal"
         data-target="#operationAddModel"
+        (click)="getCoinPairs()"
       >
         Coin Ekle
       </button>
@@ -153,7 +154,7 @@
         <ng-multiselect-dropdown
           [placeholder]="'Coin Seçin'"
           [settings]="dropdownSettings"
-          [data]="coinPairs"
+          [data]="coinPairsList"
           [(ngModel)]="coinsymbol"
           (onSelect)="setCoinSymbol($event)"
           class="text-black"

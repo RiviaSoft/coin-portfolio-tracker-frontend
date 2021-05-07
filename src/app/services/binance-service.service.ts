@@ -18,6 +18,7 @@ export class BinanceServiceService {
   ) {}
 
   getCoinPairs(){
+    this.coinPairsList=[]
     coinPairs.forEach(element => {
       this.coinPairsList.push(element.symbol)
     });
