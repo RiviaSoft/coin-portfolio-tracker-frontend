@@ -10,6 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-wallets',
@@ -28,7 +29,9 @@ export class WalletsComponent implements OnInit {
   constructor(
     private walletService:WalletService,
     private operationsService:OperationsService,
-    private formBuilder:FormBuilder
+    private formBuilder:FormBuilder,
+    private toastrService:ToastrService,
+
     ) { }
   
   ngOnInit(): void {
@@ -56,7 +59,9 @@ export class WalletsComponent implements OnInit {
     this.walletService.getWallets().subscribe((data)=>{
       data.forEach(element => {
         this.wallets.push(element)
-      });
+      } );
+    }, (error)=>{
+      this.toastrService.error("Cüzdan Eklenemedi", "Başarısız!")
     })
   }
 
@@ -66,7 +71,9 @@ export class WalletsComponent implements OnInit {
       let idNumber:number = + localStorage.getItem("id")
       wallet.userid=idNumber
       this.walletService.addWallet(wallet).subscribe((data)=>{
-        console.log(data)
+        this.toastrService.success("Cüzdan Eklendi", "Başarılı!")
+      }, (error)=>{
+        this.toastrService.error("Cüzdan Eklenemedi", "Başarısız!")
       })
     }
     
@@ -74,7 +81,7 @@ export class WalletsComponent implements OnInit {
 
   deleteWallet(wallet:WalletModel){
     this.walletService.deleteWallet(wallet).subscribe((data)=>{
-      console.log(data)
+      this.toastrService.success("Cüzdan Silindi", "Başarılı!")
     })
   }
 
@@ -98,7 +105,7 @@ export class WalletsComponent implements OnInit {
   }
 
   deleteWalletOperation(){
-    
+
   }
 
 
