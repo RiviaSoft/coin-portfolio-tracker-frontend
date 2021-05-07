@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://3.12.110.78',
+  apiUrl: 'https://api.coineus.online',
 };
 
 /*
