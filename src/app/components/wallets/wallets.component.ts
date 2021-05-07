@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { RecentOperationModel } from 'src/app/models/recentOperationModel';
 import { WalletModel } from 'src/app/models/walletModel';
@@ -35,6 +35,7 @@ export class WalletsComponent implements OnInit {
     ) { }
   
   ngOnInit(): void {
+    
     this.getRecentOperations()
     this.getWallets();
     this.createAddCoinForm();
