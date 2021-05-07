@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { RecentOperationModel } from 'src/app/models/recentOperationModel';
+import { WalletService } from 'src/app/services/wallet.service';
 
 @Component({
   selector: 'app-wallet-detail',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WalletDetailComponent implements OnInit {
 
-  constructor() { }
+  walletOperations:RecentOperationModel[]=[]
+
+  constructor(
+    private walletService:WalletService,
+    private toastrService:ToastrService,
+  
+    ) { }
 
   ngOnInit(): void {
+  }
+
+  getWalletOperations(){
+    this.walletService.getWalletOperations().subscribe((data)=>{
+      
+    })
   }
 
 }
