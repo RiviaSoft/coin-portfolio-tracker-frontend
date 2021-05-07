@@ -127,6 +127,9 @@
               >
                 Sil
               </button>
+
+              <button class="dropdown-item btn bg-dark" data-toggle="modal" data-target="#pnlModal" (click)="setSelectedModal(operation)">Kâr Ekran Görüntüsü</button>
+
               <button class="dropdown-item btn bg-dark">Güncelle</button>
             </div>
           </div>
@@ -204,6 +207,37 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="pnlModal">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content bg-dark">
+      <div class="modal-header">
+        <h4 class="modal-title">Kâr Zarar</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body container my-4">
+        <p>Coin: {{selectedModal.coinsymbol}}</p>
+        <p>Alış fiyatı: {{selectedModal.buycost}}</p>
+        <p>Anlık fiyat: {{binanceService.prices.get(selectedModal.coinsymbol.toLowerCase())}}</p>
+        <p>Kâr/Zarar: %{{pnlCalculatePercent(selectedModal.buycost, binanceService.prices.get(selectedModal.coinsymbol.toLowerCase()))}}</p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          Kapat
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <div class="modal fade" tabindex="-1" role="dialog" id="sellCoin">
   <div class="modal-dialog">

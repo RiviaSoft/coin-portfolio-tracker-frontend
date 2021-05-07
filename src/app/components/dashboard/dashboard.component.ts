@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
   coinPairsList:string[];
   dropdownSettings: IDropdownSettings;
   selectedModal:RecentOperationModel={coinsymbol:"", coinamount:0, id:0, buycost:0, userid:0};
+  selectedModalPrice:number=0;
   filterText:string;
 
   constructor(
@@ -67,6 +68,10 @@ export class DashboardComponent implements OnInit {
 
   setSelectedModal(operation:RecentOperationModel){
     this.selectedModal=operation
+  }
+
+  setSelectedModalPrice(price:number){
+    this.selectedModalPrice=price
   }
 
   setCoinSymbol(item: any) {
@@ -177,4 +182,9 @@ export class DashboardComponent implements OnInit {
   getPrice(coinSymbol:string){
     this.binanceService.openWebSocket(coinSymbol)
   }
+
+  seePnL(){
+    this.toastrService.info("Yakında Sizlerle", "Yolda geliyo")
+  }
+
 }
