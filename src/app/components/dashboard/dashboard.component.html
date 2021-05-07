@@ -75,6 +75,16 @@
         </td>
         <td class="text-center w-25">
           <span
+            >%{{
+              pnlCalculatePercent(
+                operation.buycost,
+                binanceService.prices.get(operation.coinsymbol.toLowerCase())
+              )
+            }}</span
+          >
+          
+          <br />
+          <span
             >${{
               pnlCalculate(
                 operation.coinamount,
@@ -83,15 +93,7 @@
               )
             }}</span
           >
-          <br />
-          <span
-            >%{{
-              pnlCalculatePercent(
-                operation.buycost,
-                binanceService.prices.get(operation.coinsymbol.toLowerCase())
-              )
-            }}</span
-          >
+          
         </td>
         <td class="text-center">
           <div class="dropdown">

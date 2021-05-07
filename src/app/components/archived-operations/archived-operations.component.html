@@ -59,10 +59,9 @@
         </td>
         <td class="text-center">
           <span
-            >$
+            >%
             {{
-              pnlCalculate(
-                archivedOperation.coinamount,
+              pnlCalculatePercent(
                 archivedOperation.buycost,
                 archivedOperation.sellcost
               )
@@ -70,9 +69,10 @@
           >
           <br />
           <span
-            >%
+            >$
             {{
-              pnlCalculatePercent(
+              pnlCalculate(
+                archivedOperation.coinamount,
                 archivedOperation.buycost,
                 archivedOperation.sellcost
               )
