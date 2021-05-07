@@ -77,16 +77,10 @@ export class WalletsComponent implements OnInit {
       console.log(data)
     })
   }
-  addCoin2Wallet(operationId:any){
-
-  }
-
-  
 
   refresh(): void {
     window.location.reload();
 }
-
 
   createAddCoinForm() {
     this.addWalletForm = this.formBuilder.group({
@@ -94,5 +88,18 @@ export class WalletsComponent implements OnInit {
       name: ['', Validators.required],
     });
   }
+
+  getWalletOperation(){
+
+  }
+
+  addWalletOperation(){
+
+  }
+
+  deleteWalletOperation(){
+    
+  }
+
 
 }

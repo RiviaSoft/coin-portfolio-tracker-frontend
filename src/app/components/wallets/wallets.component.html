@@ -12,7 +12,8 @@
             <div class="card-body">
               Bu cüzdan {{wallet.name}}'dir
             </div>
-            
+
+            <button type="button" class="btn btn-outline-succes" (click)="addWalletOperation()"> Cüzdana Coin Ekle </button>
             <button type="button" class="btn btn-outline-danger" (click)="deleteWallet(wallet)" (click)="refresh()"> Cüzdanı Sil </button>
           </div>
 
@@ -21,7 +22,7 @@
   </div>
 
 
-
+<!-- MODALS -->
   <div class="modal fade" tabindex="-1" role="dialog" id="walletAddModal">
 
     <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -29,7 +30,7 @@
       <div class="modal-content bg-dark">
 
         <div class="modal-header">
-          Cüzdanınıza Coin Ekleyin
+          Cüzdan Ekleyin Ekleyin
         </div>
 
         <div class="modal-body container my-4">
@@ -48,7 +49,36 @@
               />
             </div>
           </form>
+        <br><br><br>
+        </div>
+  
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-success" (click)="addWallet()" (click)="refresh()">Coini Cüzdana Ekle</button>
+        </div>
 
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+  <div class="modal fade" tabindex="-1" role="dialog" id="walletAddModal">
+
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+
+      <div class="modal-content bg-dark">
+
+        <div class="modal-header">
+          Cüzdanınıza Coin Ekleyin
+        </div>
+
+        <div class="modal-body container my-4">
+          Coini Seçin
           <!-- <ng-multiselect-dropdown
           [placeholder]="'Coinleri Seçin'"
           [settings]="dropdownSettings"
