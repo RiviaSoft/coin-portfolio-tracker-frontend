@@ -28,7 +28,11 @@
         "
       >
         <td class="text-center">
-          <div class="badge bg-success">
+          <div
+          class="badge bg-info btn"
+          data-toggle="modal"
+          data-target="#pnlModalArchivedOps"
+          (click)="setSelectedModal(archivedOperation)">
             <h6>{{ archivedOperation.coinsymbol }}</h6>
           </div>
         </td>
@@ -82,7 +86,7 @@
         <td class="text-center">
           <div class="dropdown">
             <button
-              class="btn btn-info dropdown-toggle"
+              class="btn btn-outline-primary dropdown-toggle"
               type="button"
               id="dropdownMenuButton"
               data-toggle="dropdown"
@@ -108,3 +112,57 @@
     </tbody>
   </table>
 </div>
+
+<!-- Profit & Loss Modal -->
+<div class="modal fade rounded" tabindex="-1" role="dialog" id="pnlModalArchivedOps">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content bg-dark">
+      <div class="modal-body container my-4">
+        <div class="d-flex flex-column mb-1">
+          <button class="btn btn-success p-2" type="button">🔰İndir</button>
+        </div>
+        <div class="card text-white bg-primary mb-3">
+          <div class="card-header">
+            {{ selectedModal.coinsymbol }} Kâr/Zarar Durumunuz
+          </div>
+          <div class="card-body">
+            <p>Coin: {{ selectedModal.coinsymbol }}</p>
+            <p>Alış fiyatı: {{ selectedModal.buycost }}</p>
+            <p>Satış fiyatı: {{ selectedModal.sellcost }}</p>
+            <p>
+              Kâr/Zarar: %{{ pnlCalculatePercent(selectedModal.buycost,selectedModal.sellcost) }}
+            </p>
+          </div>
+        </div>
+        <style>
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+
+        <div
+          *ngIf="
+            pnlCalculatePercent(
+              selectedModal.buycost,
+              selectedModal.sellcost
+            ) >= 0
+          "
+        >
+          <img src="./assets/profit.png" />
+        </div>
+        <div
+          *ngIf="
+          pnlCalculatePercent(
+            selectedModal.buycost,
+            selectedModal.sellcost
+          ) < 0
+          "
+        >
+          <img src="./assets/loss.png" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

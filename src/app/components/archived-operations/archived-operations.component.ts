@@ -12,6 +12,8 @@ import { PnlService } from 'src/app/services/pnl.service';
 export class ArchivedOperationsComponent implements OnInit {
   archivedOperations: ArchivedOperationModel[];
   filterText:string;
+  selectedModal:ArchivedOperationModel={coinsymbol:"", coinamount:0, id:0, buycost:0, userid:0,sellcost:0};
+
   constructor(
     private pnlService: PnlService,
     private operationsService: OperationsService,
@@ -20,6 +22,9 @@ export class ArchivedOperationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getArchivedOperations()
+  }
+  setSelectedModal(operation:ArchivedOperationModel){
+    this.selectedModal=operation
   }
 
   totalCostCalculate(amount: number, cost: number): number {
