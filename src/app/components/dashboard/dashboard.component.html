@@ -3,7 +3,7 @@
     <div class="col-md-2 w-100">
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-outline-primary"
         data-toggle="modal"
         data-target="#operationAddModel"
         (click)="getCoinPairs()"
@@ -39,9 +39,15 @@
         "
       >
         <td class="text-center">
-          <div class="badge bg-success">
+          <div *ngIf="pnlCalculatePercent(operation.buycost,binanceService.prices.get(operation.coinsymbol.toLowerCase())) >= 0 
+            || pnlCalculatePercent(operation.buycost,binanceService.prices.get(operation.coinsymbol.toLowerCase())) == null"
+           class="badge bg-success" data-toggle="modal" data-target="#pnlModal" (click)="setSelectedModal(operation)">
             <h6>{{ operation.coinsymbol }}</h6>
           </div>
+          <div *ngIf="pnlCalculatePercent(operation.buycost,binanceService.prices.get(operation.coinsymbol.toLowerCase())) < 0"
+            class="badge bg-danger" data-toggle="modal" data-target="#pnlModal" (click)="setSelectedModal(operation)">
+             <h6>{{ operation.coinsymbol }}</h6>
+           </div>
         </td>
         <td class="text-center">{{ operation.coinamount }}</td>
         <td class="text-center">
@@ -98,7 +104,7 @@
         <td class="text-center">
           <div class="dropdown">
             <button
-              class="btn btn-info dropdown-toggle"
+              class="btn btn-outline-primary dropdown-toggle"
               type="button"
               id="dropdownMenuButton"
               data-toggle="dropdown"
@@ -127,8 +133,6 @@
               >
                 Sil
               </button>
-
-              <button class="dropdown-item btn bg-dark" data-toggle="modal" data-target="#pnlModal" (click)="setSelectedModal(operation)">Kâr Ekran Görüntüsü</button>
 
               <button class="dropdown-item btn bg-dark">Güncelle</button>
             </div>
@@ -208,7 +212,7 @@
   </div>
 </div>
 
-<div class="modal fade" tabindex="-1" role="dialog" id="pnlModal">
+<div class="modal fade rounded" tabindex="-1" role="dialog" id="pnlModal">
   <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content bg-dark">
       <div class="modal-header">
