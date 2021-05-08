@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit {
   recentOperations: RecentOperationModel[] = [];
   addCoinForm: FormGroup;
   addArchivedOperationForm: FormGroup;
+  updateRecentOperationForm: FormGroup;
   dropdownList: any = [];
   coinSymbolText: any;
   coinsymbol: any;
@@ -43,12 +44,10 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCurrentUser();
-    
     this.getRecentOperations();
     setTimeout(() => {
       this.getCoinPrice();
     }, 1200);
-    
     this.createAddCoinForm();
     this.createArchivedOperationForm();
     this.dropdownSettings = {
@@ -83,9 +82,7 @@ export class DashboardComponent implements OnInit {
   }
 
   totalValueCalculate(amount: number, price: number): number {
-    let stringValue = (amount * price).toFixed(2);
-    let totalValue= +stringValue
-    return totalValue 
+    return this.pnlService.totalValueCalculate(amount, price)
   }
 
   pnlCalculate(amount: number, cost: number, price: number): number {
@@ -118,6 +115,16 @@ export class DashboardComponent implements OnInit {
 
   createAddCoinForm() {
     this.addCoinForm = this.formBuilder.group({
+      userid:0,
+      coinsymbol:'',
+      coinamount: ['', Validators.required],
+      buycost: ['', Validators.required],
+    });
+  }
+
+  createUpdateRecentOperationForm() {
+    this.updateRecentOperationForm = this.formBuilder.group({
+      id:0,
       userid:0,
       coinsymbol:'',
       coinamount: ['', Validators.required],
@@ -170,6 +177,23 @@ export class DashboardComponent implements OnInit {
     }
     else{
       this.toastrService.error("Coin Satılamadı","Başarısız")
+    }
+  }
+
+  updateRecentOperation(){
+    if (this.updateRecentOperationForm.valid) {
+      let recentOperation:RecentOperationModel=this.updateRecentOperationForm.value
+      recentOperation.id=this.selectedModal.id
+      recentOperation.coinsymbol=this.selectedModal.coinsymbol
+      recentOperation.userid=this.selectedModal.userid
+      
+      this.operationsService.addArchivedOperation(recentOperation).subscribe(data=>{
+        this.toastrService.success("Coin Güncellendi","Başarılı")
+        this.ngOnInit()
+      })
+    }
+    else{
+      this.toastrService.error("Coin Güncellenemedi","Başarısız")
     }
   }
     
