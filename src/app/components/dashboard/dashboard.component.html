@@ -39,19 +39,48 @@
         "
       >
         <td class="text-center">
-          <div *ngIf="pnlCalculatePercent(operation.buycost,binanceService.prices.get(operation.coinsymbol.toLowerCase())) >= 0 
-            || pnlCalculatePercent(operation.buycost,binanceService.prices.get(operation.coinsymbol.toLowerCase())) == null"
-           class="badge bg-success" data-toggle="modal" data-target="#pnlModal" (click)="setSelectedModal(operation)">
+          <div
+            *ngIf="
+              pnlCalculatePercent(
+                operation.buycost,
+                binanceService.prices.get(operation.coinsymbol.toLowerCase())
+              ) > 0
+            "
+            class="badge btn bg-success"
+            data-toggle="modal"
+            data-target="#pnlModal"
+            (click)="setSelectedModal(operation)"
+          >
             <h6>{{ operation.coinsymbol }}</h6>
           </div>
-          <div *ngIf="pnlCalculatePercent(operation.buycost,binanceService.prices.get(operation.coinsymbol.toLowerCase())) < 0"
-            class="badge bg-danger" data-toggle="modal" data-target="#pnlModal" (click)="setSelectedModal(operation)">
-             <h6>{{ operation.coinsymbol }}</h6>
-           </div>
-           <div *ngIf="!pnlCalculatePercent(operation.buycost,binanceService.prices.get(operation.coinsymbol.toLowerCase()))"
-            class="badge bg-info" data-toggle="modal" data-target="#pnlModal" (click)="setSelectedModal(operation)">
-             <h6>{{ operation.coinsymbol }}</h6>
-           </div>
+          <div
+            *ngIf="
+              pnlCalculatePercent(
+                operation.buycost,
+                binanceService.prices.get(operation.coinsymbol.toLowerCase())
+              ) < 0
+            "
+            class="badge btn bg-danger"
+            data-toggle="modal"
+            data-target="#pnlModal"
+            (click)="setSelectedModal(operation)"
+          >
+            <h6>{{ operation.coinsymbol }}</h6>
+          </div>
+          <div
+            *ngIf="
+              !pnlCalculatePercent(
+                operation.buycost,
+                binanceService.prices.get(operation.coinsymbol.toLowerCase())
+              )
+            "
+            class="badge bg-dark"
+            data-toggle="modal"
+            data-target="#pnlModal"
+            (click)="setSelectedModal(operation)"
+          >
+            <h6>{{ operation.coinsymbol }}</h6>
+          </div>
         </td>
         <td class="text-center">{{ operation.coinamount }}</td>
         <td class="text-center">
@@ -92,7 +121,7 @@
               )
             }}</span
           >
-          
+
           <br />
           <span
             >${{
@@ -103,7 +132,6 @@
               )
             }}</span
           >
-          
         </td>
         <td class="text-center">
           <div class="dropdown">
@@ -234,31 +262,63 @@
         </button>
       </div>
       <div class="modal-body container my-4">
-        <p>Coin: {{selectedModal.coinsymbol}}</p>
-        <p>Alış fiyatı: {{selectedModal.buycost}}</p>
-        <p>Anlık fiyat: {{binanceService.prices.get(selectedModal.coinsymbol.toLowerCase())}}</p>
-        <p>Kâr/Zarar: %{{pnlCalculatePercent(selectedModal.buycost, binanceService.prices.get(selectedModal.coinsymbol.toLowerCase()))}}</p>
-        
+        <div class="d-flex flex-column mb-1">
+          <button class="btn btn-success p-2" type="button">🔰İndir</button>
+        </div>
+        <div class="card text-white bg-primary mb-3">
+          <div class="card-header">
+            {{ selectedModal.coinsymbol }} Kâr/Zarar Durumunuz
+          </div>
+          <div class="card-body">
+            <p>Coin: {{ selectedModal.coinsymbol }}</p>
+            <p>Alış fiyatı: {{ selectedModal.buycost }}</p>
+            <p>
+              Anlık fiyat:
+              {{
+                binanceService.prices.get(
+                  selectedModal.coinsymbol.toLowerCase()
+                )
+              }}
+            </p>
+            <p>
+              Kâr/Zarar: %{{
+                pnlCalculatePercent(
+                  selectedModal.buycost,
+                  binanceService.prices.get(
+                    selectedModal.coinsymbol.toLowerCase()
+                  )
+                )
+              }}
+            </p>
+          </div>
+        </div>
         <style>
           img {
-            width:100%;
-            height:100%;
+            width: 100%;
+            height: 100%;
           }
-          </style>
-          
-        <div *ngIf="pnlCalculatePercent(selectedModal.buycost, binanceService.prices.get(selectedModal.coinsymbol.toLowerCase())) >= 0">
-          <img src="./assets/profit.png" >
-        </div>
-        <div *ngIf="pnlCalculatePercent(selectedModal.buycost, binanceService.prices.get(selectedModal.coinsymbol.toLowerCase())) < 0">
-          <img src="./assets/loss.png" >
-        </div>
+        </style>
 
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">
-          Kapat
-        </button>
+        <div
+          *ngIf="
+            pnlCalculatePercent(
+              selectedModal.buycost,
+              binanceService.prices.get(selectedModal.coinsymbol.toLowerCase())
+            ) >= 0
+          "
+        >
+          <img src="./assets/profit.png" />
+        </div>
+        <div
+          *ngIf="
+            pnlCalculatePercent(
+              selectedModal.buycost,
+              binanceService.prices.get(selectedModal.coinsymbol.toLowerCase())
+            ) < 0
+          "
+        >
+          <img src="./assets/loss.png" />
+        </div>
       </div>
     </div>
   </div>
