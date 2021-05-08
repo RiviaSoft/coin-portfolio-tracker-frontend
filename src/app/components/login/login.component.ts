@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.createLoginForm();
     this.authService.isAuthenticated().then((result)=>{
-      console.log(result)
       if(result){
         this.routerService.navigate(["home/dashboard"])
       }else {
