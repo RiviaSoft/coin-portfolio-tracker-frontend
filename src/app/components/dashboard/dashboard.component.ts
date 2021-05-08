@@ -50,6 +50,7 @@ export class DashboardComponent implements OnInit {
     }, 1200);
     this.createAddCoinForm();
     this.createArchivedOperationForm();
+    this.createUpdateRecentOperationForm();
     this.dropdownSettings = {
       singleSelection: true,
       textField: 'item_text',
@@ -186,10 +187,11 @@ export class DashboardComponent implements OnInit {
       recentOperation.id=this.selectedModal.id
       recentOperation.coinsymbol=this.selectedModal.coinsymbol
       recentOperation.userid=this.selectedModal.userid
-      
-      this.operationsService.addArchivedOperation(recentOperation).subscribe(data=>{
+      this.operationsService.updateRecentOperation(recentOperation).subscribe(data=>{
         this.toastrService.success("Coin Güncellendi","Başarılı")
         this.ngOnInit()
+      }, (error)=>{
+        this.toastrService.error("Coin Güncellenemedi", "Başarısız")
       })
     }
     else{

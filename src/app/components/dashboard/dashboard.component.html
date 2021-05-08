@@ -333,7 +333,7 @@
           <p>Satacağınız Coin: {{ selectedModal.coinsymbol }}</p>
           <p>Elinizdeki Miktar: {{ selectedModal.coinamount }}</p>
           <p>Alış Fiyatı: {{ selectedModal.buycost }}</p>
-          <p>Anlık Fiyat: 8.13</p>
+          <p>Anlık Fiyat: {{binanceService.prices.get(selectedModal.coinsymbol.toLowerCase())}}</p>
         </div>
 
         <form [formGroup]="addArchivedOperationForm">
@@ -395,16 +395,16 @@
           <p>Coin: {{ selectedModal.coinsymbol }}</p>
           <p>Elinizdeki Miktar: {{ selectedModal.coinamount }}</p>
           <p>Alış Fiyatı: {{ selectedModal.buycost }}</p>
-          <p>Anlık Fiyat: 8.13</p>
+          <p>Anlık Fiyat: {{binanceService.prices.get(selectedModal.coinsymbol.toLowerCase())}}</p>
         </div>
 
-        <form [formGroup]="addArchivedOperationForm">
+        <form [formGroup]="updateRecentOperationForm">
           <div class="form-group">
             <input
               formControlName="coinamount"
               type="number"
               class="form-control bg-dark"
-              id="floatingInput2"
+              id="floatingInput5"
               placeholder="Elinizdeki Miktar:"
             />
           </div>
@@ -414,7 +414,7 @@
               formControlName="buycost"
               type="number"
               class="form-control bg-dark"
-              id="floatingInput3"
+              id="floatingInput4"
               placeholder="Alış Fiyatı:"
             />
           </div>
@@ -430,7 +430,7 @@
           data-dismiss="modal"
           (click)="updateRecentOperation()"
         >
-          Satıldı olarak işaretle
+          Güncelle
         </button>
       </div>
     </div>
