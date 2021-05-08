@@ -29,7 +29,6 @@ export class OperationsService {
   }
 
   deleteRecentOperation(operation:RecentOperationModel):Observable<ResultModel>{
-    console.log(operation)
     let newPath = this.apiUrl+"operations/delete"
     return this.httpClient.post<ResultModel>(newPath, operation)
 
