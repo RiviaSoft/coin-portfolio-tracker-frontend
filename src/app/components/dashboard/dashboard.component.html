@@ -48,6 +48,10 @@
             class="badge bg-danger" data-toggle="modal" data-target="#pnlModal" (click)="setSelectedModal(operation)">
              <h6>{{ operation.coinsymbol }}</h6>
            </div>
+           <div *ngIf="!pnlCalculatePercent(operation.buycost,binanceService.prices.get(operation.coinsymbol.toLowerCase()))"
+            class="badge bg-info" data-toggle="modal" data-target="#pnlModal" (click)="setSelectedModal(operation)">
+             <h6>{{ operation.coinsymbol }}</h6>
+           </div>
         </td>
         <td class="text-center">{{ operation.coinamount }}</td>
         <td class="text-center">
