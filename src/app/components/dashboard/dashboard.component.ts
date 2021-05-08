@@ -83,9 +83,7 @@ export class DashboardComponent implements OnInit {
   }
 
   totalValueCalculate(amount: number, price: number): number {
-    let stringValue = (amount * price).toFixed(2);
-    let totalValue= +stringValue
-    return totalValue 
+    return this.pnlService.totalValueCalculate(amount, price)
   }
 
   pnlCalculate(amount: number, cost: number, price: number): number {

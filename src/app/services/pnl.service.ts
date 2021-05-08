@@ -28,4 +28,11 @@ export class PnlService {
     return totalCost
   }
 
+  totalValueCalculate(amount: number, price: number): number {
+    let stringValue = (amount * price).toFixed(2);
+    let totalValue= +stringValue
+    return totalValue 
+  }
+
+
 }

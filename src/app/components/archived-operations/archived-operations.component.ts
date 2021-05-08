@@ -23,11 +23,11 @@ export class ArchivedOperationsComponent implements OnInit {
   }
 
   totalCostCalculate(amount: number, cost: number): number {
-    return amount * cost;
+    return this.pnlService.totalCostCalculate(amount, cost)
   }
 
   totalValueCalculate(amount: number, price: number): number {
-    return amount * price;
+    return this.pnlService.totalValueCalculate(amount, price)
   }
 
   pnlCalculate(amount: number, cost: number, price: number): number {
