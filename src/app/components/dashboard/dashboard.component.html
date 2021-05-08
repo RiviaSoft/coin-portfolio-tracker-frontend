@@ -137,8 +137,8 @@
               >
                 Sil
               </button>
-
-              <button class="dropdown-item btn bg-dark">Güncelle</button>
+ 
+              <button class="dropdown-item btn bg-dark" data-toggle="modal" data-target="#updateOperation" (click)="setSelectedModal(operation)">Güncelle</button>
             </div>
           </div>
         </td>
@@ -148,6 +148,8 @@
 </div>
 
 <!-- MODALS -->
+
+<!-- Buy Modal -->
 <div class="modal fade" tabindex="-1" role="dialog" id="operationAddModel">
   <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content bg-dark">
@@ -216,6 +218,7 @@
   </div>
 </div>
 
+<!-- Profit & Loss Modal -->
 <div class="modal fade rounded" tabindex="-1" role="dialog" id="pnlModal">
   <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content bg-dark">
@@ -261,7 +264,7 @@
   </div>
 </div>
 
-
+<!-- Sell Modal -->
 <div class="modal fade" tabindex="-1" role="dialog" id="sellCoin">
   <div class="modal-dialog">
     <div class="modal-content bg-dark">
@@ -315,6 +318,68 @@
           class="btn btn-primary"
           data-dismiss="modal"
           (click)="addArchivedOperation()"
+        >
+          Satıldı olarak işaretle
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Update Modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="updateOperation">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark">
+      <div class="modal-header">
+        <h4 class="modal-title">Güncelle</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body container my-4">
+        <div class="jumbotron bg-success">
+          <p>Coin: {{ selectedModal.coinsymbol }}</p>
+          <p>Elinizdeki Miktar: {{ selectedModal.coinamount }}</p>
+          <p>Alış Fiyatı: {{ selectedModal.buycost }}</p>
+          <p>Anlık Fiyat: 8.13</p>
+        </div>
+
+        <form [formGroup]="addArchivedOperationForm">
+          <div class="form-group">
+            <input
+              formControlName="coinamount"
+              type="number"
+              class="form-control bg-dark"
+              id="floatingInput2"
+              placeholder="Elinizdeki Miktar:"
+            />
+          </div>
+          <br />
+          <div class="form-group">
+            <input
+              formControlName="buycost"
+              type="number"
+              class="form-control bg-dark"
+              id="floatingInput3"
+              placeholder="Alış Fiyatı:"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          Kapat
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-dismiss="modal"
+          (click)="updateRecentOperation()"
         >
           Satıldı olarak işaretle
         </button>

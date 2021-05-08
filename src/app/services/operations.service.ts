@@ -55,4 +55,9 @@ export class OperationsService {
     let newPath = this.apiUrl + "operations/add"
     return this.httpClient.post<ResultModel>(newPath, recentOperation)
   }
+
+  updateRecentOperation(recentOperation:RecentOperationModel):Observable<ResultModel>{
+    let newPath = this.apiUrl + "operations/update"
+    return this.httpClient.post<ResultModel>(newPath, recentOperation)
+  }
 }
