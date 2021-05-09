@@ -20,6 +20,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
   token:string;
   loginForm: FormGroup;
+  logging:boolean = false;
 
 
   constructor(
@@ -50,6 +51,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.loginForm.valid) {
+      this.logging = true;
       let loginModel = this.loginForm.value;
       this.authService.login(loginModel).subscribe(data => {
         this.token = data["token"];
@@ -58,9 +60,11 @@ export class LoginComponent implements OnInit {
         this.routerService.navigate(["home/dashboard"])
       }, responseError=>{
         this.toastrService.error("Email veya parola hatalı", "Hata")
+        this.logging = false;
       });
     } else {
       this.toastrService.error('Geçersiz Giriş !');
+      this.logging = false;
     }
   }
 }
