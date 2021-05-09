@@ -8,7 +8,7 @@
         data-target="#operationAddModel"
         (click)="getCoinPairs()"
       >
-        ➕Coin Ekle
+        ➕ İşlem Ekle
       </button>
     </div>
     <div class="col-md-10">
@@ -17,7 +17,7 @@
         [(ngModel)]="filterText"
         class="form-control bg-dark rounded mx-1 my-1"
         id="searchRecentOperation"
-        placeholder="Aramak istediğiniz coin"
+        placeholder="Aramak istediğiniz işlem"
       />
     </div>
   </div>
@@ -156,7 +156,7 @@
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                İşlemler
+                Seçenekler
               </button>
               <div
                 class="dropdown-menu bg-dark"
@@ -199,7 +199,7 @@
   <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content bg-dark">
       <div class="modal-header">
-        <h4 class="modal-title">Coin Ekle</h4>
+        <h4 class="modal-title">İşlem Ekle</h4>
         <button
           type="button"
           class="close"
