@@ -29,12 +29,22 @@
       >
         <td class="text-center">
           <div
-          class="badge bg-info btn"
+          *ngIf="pnlCalculatePercent(archivedOperation.buycost,archivedOperation.sellcost) >= 0"
+          class="badge bg-success btn"
           data-toggle="modal"
           data-target="#pnlModalArchivedOps"
           (click)="setSelectedModal(archivedOperation)">
             <h6>{{ archivedOperation.coinsymbol }}</h6>
           </div>
+          <div
+          *ngIf="pnlCalculatePercent(archivedOperation.buycost,archivedOperation.sellcost) < 0"
+          class="badge bg-danger btn"
+          data-toggle="modal"
+          data-target="#pnlModalArchivedOps"
+          (click)="setSelectedModal(archivedOperation)">
+            <h6>{{ archivedOperation.coinsymbol }}</h6>
+          </div>
+
         </td>
         <td class="text-center">{{ archivedOperation.coinamount }}</td>
         <td class="text-center">

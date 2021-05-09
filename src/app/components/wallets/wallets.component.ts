@@ -73,22 +73,20 @@ export class WalletsComponent implements OnInit {
       wallet.userid=idNumber
       this.walletService.addWallet(wallet).subscribe((data)=>{
         this.toastrService.success("Cüzdan Eklendi", "Başarılı!")
+        window.location.reload();
       }, (error)=>{
         this.toastrService.error("Cüzdan Eklenemedi", "Başarısız!")
+        window.location.reload();
       })
     }
-    
   }
 
   deleteWallet(wallet:WalletModel){
     this.walletService.deleteWallet(wallet).subscribe((data)=>{
-      this.toastrService.success("Cüzdan Silindi", "Başarılı!")
+      this.toastrService.success("Cüzdan Silindi", "Başarılı!");
+      window.location.reload();
     })
   }
-
-  refresh(): void {
-    window.location.reload();
-}
 
   createAddCoinForm() {
     this.addWalletForm = this.formBuilder.group({
