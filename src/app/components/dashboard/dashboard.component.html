@@ -1,21 +1,21 @@
 <div class="container-fluid">
   <div class="row mb-4">
-    <div class="col-md-2 w-100">
+    <div class="col-md-2">
       <button
         type="button"
-        class="btn btn-outline-primary"
+        class="btn btn-outline-primary mx-2 my-1"
         data-toggle="modal"
         data-target="#operationAddModel"
         (click)="getCoinPairs()"
       >
-        Coin Ekle
+        ➕Coin Ekle
       </button>
     </div>
     <div class="col-md-10">
       <input
         type="text"
         [(ngModel)]="filterText"
-        class="form-control bg-dark rounded"
+        class="form-control bg-dark rounded mx-2 my-1"
         id="searchRecentOperation"
         placeholder="Aramak istediğiniz coin"
       />
@@ -182,7 +182,7 @@
   <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content bg-dark">
       <div class="modal-header">
-        <h4 class="modal-title">Add Item</h4>
+        <h4 class="modal-title">Coin Ekle</h4>
         <button
           type="button"
           class="close"
@@ -239,7 +239,7 @@
           data-dismiss="modal"
           (click)="addRecentOperation()"
         >
-          Değişiklikleri Kaydet
+          Ekle
         </button>
       </div>
     </div>
