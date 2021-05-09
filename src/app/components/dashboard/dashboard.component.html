@@ -21,161 +21,175 @@
       />
     </div>
   </div>
-  <table class="table">
-    <thead>
-      <tr>
-        <th class="text-center">Sembol</th>
-        <th class="text-center">Adet</th>
-        <th class="text-center">Alış</th>
-        <th class="text-center">Anlık</th>
-        <th class="text-center">Kâr/Zarar</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        *ngFor="
-          let operation of recentOperations | recentOperationFilter: filterText
-        "
-      >
-        <td class="text-center">
-          <div
-            *ngIf="
-              pnlCalculatePercent(
-                operation.buycost,
-                binanceService.prices.get(operation.coinsymbol.toLowerCase())
-              ) > 0
-            "
-            class="badge btn bg-success"
-            data-toggle="modal"
-            data-target="#pnlModal"
-            (click)="setSelectedModal(operation)"
-          >
-            <h6>{{ operation.coinsymbol }}</h6>
-          </div>
-          <div
-            *ngIf="
-              pnlCalculatePercent(
-                operation.buycost,
-                binanceService.prices.get(operation.coinsymbol.toLowerCase())
-              ) < 0
-            "
-            class="badge btn bg-danger"
-            data-toggle="modal"
-            data-target="#pnlModal"
-            (click)="setSelectedModal(operation)"
-          >
-            <h6>{{ operation.coinsymbol }}</h6>
-          </div>
-          <div
-            *ngIf="
-              !pnlCalculatePercent(
-                operation.buycost,
-                binanceService.prices.get(operation.coinsymbol.toLowerCase())
-              )
-            "
-            class="badge bg-dark"
-            data-toggle="modal"
-            data-target="#pnlModal"
-            (click)="setSelectedModal(operation)"
-          >
-            <h6>{{ operation.coinsymbol }}</h6>
-          </div>
-        </td>
-        <td class="text-center">{{ operation.coinamount }}</td>
-        <td class="text-center">
-          <div class="d-flex justify-content-between px-4">
-            <strong>Birim Maliyet:</strong>
-            <span style="float: right">{{ operation.buycost }}</span>
-          </div>
-          <div class="d-flex justify-content-between px-4">
-            <strong>Toplam Maliyet:</strong>
-            <span style="float: right">{{
-              totalCostCalculate(operation.buycost, operation.coinamount)
-            }}</span>
-          </div>
-        </td>
-        <td class="text-center w-25">
-          <div class="d-flex justify-content-between px-4">
-            <strong>Birim Değer:</strong>
-            <span>{{
-              binanceService.prices.get(operation.coinsymbol.toLowerCase())
-            }}</span>
-          </div>
-          <div class="d-flex justify-content-between px-4">
-            <strong>Toplam Değer:</strong>
-            <span>{{
-              totalValueCalculate(
-                binanceService.prices.get(operation.coinsymbol.toLowerCase()),
-                operation.coinamount
-              )
-            }}</span>
-          </div>
-        </td>
-        <td class="text-center w-25">
-          <span
-            >%{{
-              pnlCalculatePercent(
-                operation.buycost,
-                binanceService.prices.get(operation.coinsymbol.toLowerCase())
-              )
-            }}</span
-          >
-
-          <br />
-          <span
-            >${{
-              pnlCalculate(
-                operation.coinamount,
-                operation.buycost,
-                binanceService.prices.get(operation.coinsymbol.toLowerCase())
-              )
-            }}</span
-          >
-        </td>
-        <td class="text-center">
-          <div class="dropdown">
-            <button
-              class="btn btn-outline-primary dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              İşlemler
-            </button>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="text-center">Sembol</th>
+          <th class="text-center">Adet</th>
+          <th class="text-center">Alış</th>
+          <th class="text-center">Anlık</th>
+          <th class="text-center">Kâr/Zarar</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let operation of recentOperations | recentOperationFilter: filterText
+          "
+        >
+          <td class="text-center">
             <div
-              class="dropdown-menu bg-dark"
-              aria-labelledby="dropdownMenuButton"
+              *ngIf="
+                pnlCalculatePercent(
+                  operation.buycost,
+                  binanceService.prices.get(operation.coinsymbol.toLowerCase())
+                ) > 0
+              "
+              class="badge btn bg-success"
+              data-toggle="modal"
+              data-target="#pnlModal"
+              (click)="setSelectedModal(operation)"
             >
-              <button
-                type="button"
-                class="btn bg-dark dropdown-item"
-                data-toggle="modal"
-                data-target="#sellCoin"
-                (click)="setSelectedModal(operation)"
-              >
-                Sat
-              </button>
-
-              <button
-                class="dropdown-item btn bg-dark"
-                type="button"
-                data-toggle="modal"
-                data-target="#deleteRecentOperationModal"
-                (click)="setSelectedModal(operation)"
-                >
-                Sil
-              </button>
- 
-              <button class="dropdown-item btn bg-dark" data-toggle="modal" data-target="#updateOperation" (click)="setSelectedModal(operation)">Güncelle</button>
+              <h6>{{ operation.coinsymbol }}</h6>
             </div>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+            <div
+              *ngIf="
+                pnlCalculatePercent(
+                  operation.buycost,
+                  binanceService.prices.get(operation.coinsymbol.toLowerCase())
+                ) < 0
+              "
+              class="badge btn bg-danger"
+              data-toggle="modal"
+              data-target="#pnlModal"
+              (click)="setSelectedModal(operation)"
+            >
+              <h6>{{ operation.coinsymbol }}</h6>
+            </div>
+            <div
+              *ngIf="
+                !pnlCalculatePercent(
+                  operation.buycost,
+                  binanceService.prices.get(operation.coinsymbol.toLowerCase())
+                )
+              "
+              class="badge bg-dark"
+              data-toggle="modal"
+              data-target="#pnlModal"
+              (click)="setSelectedModal(operation)"
+            >
+              <h6>{{ operation.coinsymbol }}</h6>
+            </div>
+          </td>
+          <td class="text-center">{{ operation.coinamount }}</td>
+          <td class="text-center">
+            <div class="d-flex justify-content-between px-4">
+              <strong>Birim Maliyet:</strong>
+              <span style="float: right">{{ operation.buycost }}</span>
+            </div>
+            <div class="d-flex justify-content-between px-4">
+              <strong>Toplam Maliyet:</strong>
+              <span style="float: right">{{
+                totalCostCalculate(operation.buycost, operation.coinamount)
+              }}</span>
+            </div>
+          </td>
+          <td class="text-center w-25" *ngIf="binanceService.prices.get(operation.coinsymbol.toLowerCase())">
+            <div class="d-flex justify-content-between px-4">
+              <strong>Birim Değer:</strong>
+              <span>{{
+                binanceService.prices.get(operation.coinsymbol.toLowerCase())
+              }}</span>
+            </div>
+            <div class="d-flex justify-content-between px-4">
+              <strong>Toplam Değer:</strong>
+              <span>{{
+                totalValueCalculate(
+                  binanceService.prices.get(operation.coinsymbol.toLowerCase()),
+                  operation.coinamount
+                )
+              }}</span>
+            </div>
+          </td>
+          <td *ngIf="!binanceService.prices.get(operation.coinsymbol.toLowerCase())">
+            <div class="d-flex justify-content-center">
+              <div class="spinner-grow" role="status">
+              </div>
+            </div>
+          </td>
+          <td class="text-center w-25" *ngIf="binanceService.prices.get(operation.coinsymbol.toLowerCase())">
+            <span
+              >%{{
+                pnlCalculatePercent(
+                  operation.buycost,
+                  binanceService.prices.get(operation.coinsymbol.toLowerCase())
+                )
+              }}</span
+            >
+  
+            <br />
+            <span
+              >${{
+                pnlCalculate(
+                  operation.coinamount,
+                  operation.buycost,
+                  binanceService.prices.get(operation.coinsymbol.toLowerCase())
+                )
+              }}</span
+            >
+          </td>
+          <td *ngIf="!binanceService.prices.get(operation.coinsymbol.toLowerCase())">
+            <div class="d-flex justify-content-center">
+              <div class="spinner-grow" role="status">
+              </div>
+            </div>
+          </td>
+          <td class="text-center">
+            <div class="dropdown">
+              <button
+                class="btn btn-outline-primary dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                İşlemler
+              </button>
+              <div
+                class="dropdown-menu bg-dark"
+                aria-labelledby="dropdownMenuButton"
+              >
+                <button
+                  type="button"
+                  class="btn bg-dark dropdown-item"
+                  data-toggle="modal"
+                  data-target="#sellCoin"
+                  (click)="setSelectedModal(operation)"
+                >
+                  Sat
+                </button>
+  
+                <button
+                  class="dropdown-item btn bg-dark"
+                  type="button"
+                  data-toggle="modal"
+                  data-target="#deleteRecentOperationModal"
+                  (click)="setSelectedModal(operation)"
+                  >
+                  Sil
+                </button>
+   
+                <button class="dropdown-item btn bg-dark" data-toggle="modal" data-target="#updateOperation" (click)="setSelectedModal(operation)">Güncelle</button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <!-- MODALS -->
@@ -299,7 +313,7 @@
             ) >= 0
           "
         >
-          <img src="./assets/profit.png" />
+          <img src="./assets/profit.webp" />
         </div>
         <div
           *ngIf="
@@ -309,7 +323,7 @@
             ) < 0
           "
         >
-          <img src="./assets/loss.png" />
+          <img src="./assets/loss.webp" />
         </div>
       </div>
     </div>
