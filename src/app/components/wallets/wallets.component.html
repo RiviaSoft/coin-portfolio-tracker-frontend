@@ -1,24 +1,16 @@
 <div>
-    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#walletAddModal"> Cüzdan Ekle </button>
+    <button type="button" class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#walletAddModal"> Cüzdan Ekle </button>
 </div>
 
 <div class="row">
     <div class="col-md-4" *ngFor="let wallet of wallets ">
-        <div class="card text-center text-white bg-dark">
-            <div class="card-header " 
-            routerLink="/home/walletdetail">
-              <h5>{{wallet.name}}</h5>
+        <div id="wallet" class="card text-center mx-2 my-3 rounded">
+            <div class="card-body btn" routerLink="/home/walletdetail/{{wallet.id}}">
+              <h3>{{wallet.name}}</h3>
             </div>
-            <div class="card-body">
-              Cüzdan içeriği**
-            </div>
-
-            <button type="button" class="btn btn-outline-succes" (click)="addWalletOperation()" data-toggle="modal" data-target="#walletOperationAddModal"> Cüzdana Coin Ekle </button>
-            <button type="button" class="btn btn-outline-danger" (click)="deleteWallet(wallet)" (click)="refresh()"> Cüzdanı Sil </button>
+            <button type="button" class="btn btn-outline-danger" (click)="deleteWallet(wallet)"> ⛔ Sil </button>
           </div>
-
     </div>
-      
   </div>
 
 
@@ -51,44 +43,7 @@
         </div>
   
         <div class="modal-footer">
-            <button type="button" class="btn btn-outline-success" (click)="addWallet()" (click)="refresh()">Ekle</button>
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="modal fade" tabindex="-1" role="dialog" id="walletOperationAddModal">
-
-    <div class="modal-dialog modal-dialog-scrollable" role="document">
-
-      <div class="modal-content bg-dark">
-
-        <div class="modal-header">
-          Cüzdanınıza Coin Ekleyin
-        </div>
-
-        <div class="modal-body container my-4">
-          Coini Seçin
-          <ng-multiselect-dropdown
-          [placeholder]="'Coinleri Seçin'"
-          [settings]="dropdownSettings"
-          [data]="recentOperations"
-          [(ngModel)]="coinsymbol"
-          (onSelect)="addWalletOperation()"
-          class="text-black"
-        >
-        </ng-multiselect-dropdown>
-        <br><br><br>
-        <br><br><br>
-        <br><br><br>
-        <br><br><br>
-        </div>
-  
-        <div class="modal-footer">
-            <button type="button" class="btn btn-outline-success" (click)="addWallet()" (click)="refresh()">Coini Cüzdana Ekle</button>
+            <button type="button" class="btn btn-outline-success" (click)="addWallet()">Ekle</button>
         </div>
 
       </div>
