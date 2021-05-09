@@ -17,6 +17,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class RegisterComponent implements OnInit {
   registerForm:FormGroup
+  signingUp:boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -38,11 +39,13 @@ export class RegisterComponent implements OnInit {
 
   register(){
     if(this.registerForm.valid){
+      this.signingUp = true;
       let registerModel = this.registerForm.value
       this.authService.register(registerModel).subscribe(data => {
         this.toastrService.success("Lütfen email ve şifrenizi kullanarak giriş yapın", "Kayıt Başarılı!")
         this.routerService.navigate([""])
       }, responseError=>{
+        this.signingUp = false;
         this.toastrService.error("Kayıt Başarısız!", "Hata")
       })
     }

@@ -32,7 +32,11 @@
           placeholder="Parola"
         />
       </div>
-      <button class="w-100 btn btn-success" (click)="register()">Kayıt Ol</button>
+      <button *ngIf="!signingUp" class="w-100 btn btn-success" (click)="register()">Kayıt Ol</button>
+      <button *ngIf="signingUp" class="w-100 btn btn-success" type="button" disabled>
+        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        Kayıt Ol
+      </button>
     </form>
   </div>
   
