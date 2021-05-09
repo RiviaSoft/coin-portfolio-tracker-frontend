@@ -105,10 +105,9 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  deleteRecentOperation(operation: RecentOperationModel) {
-    this.operationsService
-      .deleteRecentOperation(operation)
-      .subscribe((response) => {
+  deleteRecentOperation() {
+    let operation:RecentOperationModel=this.selectedModal
+    this.operationsService.deleteRecentOperation(operation).subscribe((response) => {
         this.toastrService.success('İşlem silindi.', 'Başarılı');
         this.ngOnInit();
       });

@@ -161,8 +161,11 @@
 
               <button
                 class="dropdown-item btn bg-dark"
-                (click)="deleteRecentOperation(operation)"
-              >
+                type="button"
+                data-toggle="modal"
+                data-target="#deleteRecentOperationModal"
+                (click)="setSelectedModal(operation)"
+                >
                 Sil
               </button>
  
@@ -431,6 +434,47 @@
           (click)="updateRecentOperation()"
         >
           Güncelle
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Recent Operation Modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="deleteRecentOperationModal">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark">
+      <div class="modal-header">
+        <h4 class="modal-title">Güncelle</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body container my-4">
+        <div class="jumbotron bg-danger">
+          <p>Coin: {{ selectedModal.coinsymbol }}</p>
+          <p>Elinizdeki Miktar: {{ selectedModal.coinamount }}</p>
+          <p>Alış Fiyatı: {{ selectedModal.buycost }}</p>
+          <p>Anlık Fiyat: {{binanceService.prices.get(selectedModal.coinsymbol.toLowerCase())}}</p>
+          <p>Silmek istediğinize emin misiniz?</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          Kapat
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-dismiss="modal"
+          (click)="deleteRecentOperation()"
+        >
+        Sil       
         </button>
       </div>
     </div>
