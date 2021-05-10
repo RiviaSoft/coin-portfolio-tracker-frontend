@@ -21,10 +21,22 @@ export class WalletDetailComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getWalletOperations(){
-    this.walletService.getWalletOperations().subscribe((data)=>{
+  // getWalletOperations(){
+  //   this.walletService.getWalletOperations().subscribe((data)=>{
       
-    })
+  //   })
+  // }
+
+  getWalletOperation(){
+
+  }
+
+  addWalletOperation(){
+
+  }
+
+  deleteWalletOperation(){
+
   }
 
 }

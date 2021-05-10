@@ -5,6 +5,7 @@ import { WalletModel } from 'src/app/models/walletModel';
 import { Observable } from 'rxjs';
 import { ResultModel } from '../models/resultModel';
 import { RecentOperationModel } from '../models/recentOperationModel';
+import { walletOperationModel } from '../models/walletOperationModel';
 
 @Injectable({
   providedIn: 'root'
@@ -33,9 +34,10 @@ export class WalletService {
     return this.httpClient.post<ResultModel>(newPath, wallet)
   }
 
-  getWalletOperations():Observable<RecentOperationModel[]>{
+  getWalletOperations(id:number):Observable<walletOperationModel>{
     let newPath = this.apiUrl+"walletoperations/getall"
-    return this.httpClient.get<RecentOperationModel[]>(newPath)
+    let stringId= id.toString()
+    return this.httpClient.get<walletOperationModel>(newPath, {params:{id:stringId}})
   }
 
   addWalletOperation(){

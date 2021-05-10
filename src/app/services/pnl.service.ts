@@ -7,10 +7,14 @@ export class PnlService {
 
   constructor() { }
   
-  profitLoss(amount:number, cost:number, price:number):number{
+  pnl = new Map<string, number>();
+
+
+  profitLoss(amount:number, cost:number, price:number, coinsymbol:string):number{
     let pnl:number = (amount*price)-(amount*cost)
     let pnls:string = pnl.toFixed(2)
     pnl = +pnls
+    this.pnl.set(coinsymbol, pnl)
     return pnl
   }
 
@@ -34,5 +38,14 @@ export class PnlService {
     return totalValue 
   }
 
+  getTotalPnl():number{
+    let totalPnl:number = 0
+    this.pnl.forEach(element => {
+      totalPnl += element
+    });
+    let stringValue = totalPnl.toFixed(2);
+    totalPnl = +stringValue
+    return totalPnl
+  }
 
 }

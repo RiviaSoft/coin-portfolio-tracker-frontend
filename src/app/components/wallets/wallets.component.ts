@@ -61,8 +61,6 @@ export class WalletsComponent implements OnInit {
       data.forEach(element => {
         this.wallets.push(element)
       } );
-    }, (error)=>{
-      this.toastrService.error("Cüzdan Eklenemedi", "Başarısız!")
     })
   }
 
@@ -95,17 +93,8 @@ export class WalletsComponent implements OnInit {
     });
   }
 
-  getWalletOperation(){
-
+  setSelectedWallet(id:number){
+    
   }
-
-  addWalletOperation(){
-
-  }
-
-  deleteWalletOperation(){
-
-  }
-
 
 }
