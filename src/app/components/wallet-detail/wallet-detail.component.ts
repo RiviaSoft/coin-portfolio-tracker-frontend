@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { RecentOperationModel } from 'src/app/models/recentOperationModel';
+import { walletOperationModel } from 'src/app/models/walletOperationModel';
+import { OperationsService } from 'src/app/services/operations.service';
 import { WalletService } from 'src/app/services/wallet.service';
 
 @Component({
@@ -11,12 +13,14 @@ import { WalletService } from 'src/app/services/wallet.service';
 })
 export class WalletDetailComponent implements OnInit {
 
-  walletOperations:RecentOperationModel[]=[]
+  walletRecentOperations:RecentOperationModel[]=[]
   walletId:number;
+
   constructor(
     private activatedRoute:ActivatedRoute,
     private walletService:WalletService,
     private toastrService:ToastrService,
+    private operationsService:OperationsService
   
     ) { }
 
@@ -27,14 +31,15 @@ export class WalletDetailComponent implements OnInit {
         this.getWalletOperations(params['walletid'])
       }
     })
+
   }
 
 
   getWalletOperations(walletId:number){
-    this.walletService.getWalletOperations(walletId).subscribe((data)=>{
-      console.log(data)
-    })
+    this.walletRecentOperations= this.walletService.getWalletRecentOperations(walletId)
+    console.log(this.walletRecentOperations)
   }
+
 
   addWalletOperation(){
 
