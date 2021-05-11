@@ -7,14 +7,19 @@ export class PnlService {
 
   constructor() { }
   
-  pnl = new Map<string, number>();
+  recentPnl = new Map<string, number>();
+  archivedPnl = new Map<string, number>();
 
 
-  profitLoss(amount:number, cost:number, price:number, coinsymbol:string):number{
+  profitLoss(amount:number, cost:number, price:number, coinsymbol:string, isArchived:boolean):number{
     let pnl:number = (amount*price)-(amount*cost)
     let pnls:string = pnl.toFixed(2)
     pnl = +pnls
-    this.pnl.set(coinsymbol, pnl)
+    if(!isArchived){
+      this.recentPnl.set(coinsymbol, pnl)
+    }else{
+      this.archivedPnl.set(coinsymbol, pnl)
+    }
     return pnl
   }
 
@@ -38,9 +43,17 @@ export class PnlService {
     return totalValue 
   }
 
-  getTotalPnl():number{
+  getRecentPnl():number{
+    return this.getTotalPnl(this.recentPnl)
+  }
+
+  getArchivedPnl():number{
+    return this.getTotalPnl(this.archivedPnl)
+  }
+
+  getTotalPnl(map:Map<string, number>){
     let totalPnl:number = 0
-    this.pnl.forEach(element => {
+    map.forEach(element => {
       totalPnl += element
     });
     let stringValue = totalPnl.toFixed(2);

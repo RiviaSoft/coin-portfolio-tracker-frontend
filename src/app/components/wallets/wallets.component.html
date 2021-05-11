@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-md-4" *ngFor="let wallet of wallets ">
         <div id="wallet" class="card text-center mx-2 my-3 rounded">
-            <div class="card-body btn" routerLink="/home/walletdetail/{{wallet.id}}">
+            <div class="card-body btn" [routerLink]="[wallet.id]">
               <h3>{{wallet.name}}</h3>
             </div>
             <button type="button" class="btn btn-outline-danger" (click)="deleteWallet(wallet)"> ⛔ Sil </button>

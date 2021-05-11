@@ -87,7 +87,7 @@ export class DashboardComponent implements OnInit {
   }
 
   pnlCalculate(amount: number, cost: number, price: number, coinsymbol:string): number {
-    return this.pnlService.profitLoss(amount, cost, price, coinsymbol);
+    return this.pnlService.profitLoss(amount, cost, price, coinsymbol, false);
   }
 
   pnlCalculatePercent(cost: number, price: number): number {
@@ -213,6 +213,6 @@ export class DashboardComponent implements OnInit {
   }
 
   getTotalPnl(){
-    return this.pnlService.getTotalPnl()
+    return this.pnlService.getRecentPnl()
   }
 }

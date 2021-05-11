@@ -36,7 +36,7 @@ export class ArchivedOperationsComponent implements OnInit {
   }
 
   pnlCalculate(amount: number, cost: number, price: number, coinsymbol:string): number {
-    return this.pnlService.profitLoss(amount, cost, price, coinsymbol);
+    return this.pnlService.profitLoss(amount, cost, price, coinsymbol, true);
   }
 
   pnlCalculatePercent(cost: number, price: number): number {
@@ -54,6 +54,10 @@ export class ArchivedOperationsComponent implements OnInit {
       this.toatrService.success("Arşivlenmiş işlem silindi.", "Başarılı")
       this.ngOnInit();
     })
+  }
+
+  getTotalPnl(){
+    return this.pnlService.getArchivedPnl()
   }
 
 }
