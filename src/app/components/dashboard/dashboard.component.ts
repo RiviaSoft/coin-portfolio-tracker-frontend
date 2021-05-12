@@ -86,12 +86,16 @@ export class DashboardComponent implements OnInit {
     return this.pnlService.totalValueCalculate(amount, price)
   }
 
-  pnlCalculate(amount: number, cost: number, price: number): number {
-    return this.pnlService.profitLoss(amount, cost, price);
+  pnlCalculate(amount: number, cost: number, price: number, coinsymbol:string): number {
+    return this.pnlService.profitLoss(amount, cost, price, coinsymbol, false);
   }
 
   pnlCalculatePercent(cost: number, price: number): number {
     return this.pnlService.profitLossPercent(cost, price);
+  }
+
+  totalPnl(){
+    
   }
 
   getRecentOperations() {
@@ -208,8 +212,7 @@ export class DashboardComponent implements OnInit {
     this.binanceService.openWebSocket(coinSymbol)
   }
 
-  seePnL(){
-    this.toastrService.info("Yakında Sizlerle", "Yolda geliyo")
+  getTotalPnl(){
+    return this.pnlService.getRecentPnl()
   }
-
 }

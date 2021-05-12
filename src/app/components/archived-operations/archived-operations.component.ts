@@ -35,8 +35,8 @@ export class ArchivedOperationsComponent implements OnInit {
     return this.pnlService.totalValueCalculate(amount, price)
   }
 
-  pnlCalculate(amount: number, cost: number, price: number): number {
-    return this.pnlService.profitLoss(amount, cost, price);
+  pnlCalculate(amount: number, cost: number, price: number, coinsymbol:string): number {
+    return this.pnlService.profitLoss(amount, cost, price, coinsymbol, true);
   }
 
   pnlCalculatePercent(cost: number, price: number): number {
@@ -55,4 +55,9 @@ export class ArchivedOperationsComponent implements OnInit {
       this.ngOnInit();
     })
   }
+
+  getTotalPnl(){
+    return this.pnlService.getArchivedPnl()
+  }
+
 }

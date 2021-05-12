@@ -18,6 +18,16 @@ export class OperationsService {
 
   constructor(private httpClient:HttpClient) { }
 
+  addRecentOperation(recentOperation:RecentOperationModel):Observable<ResultModel>{
+    let newPath = this.apiUrl + "operations/add"
+    return this.httpClient.post<ResultModel>(newPath, recentOperation)
+  }
+
+  updateRecentOperation(recentOperation:RecentOperationModel):Observable<ResultModel>{
+    let newPath = this.apiUrl + "operations/update"
+    return this.httpClient.post<ResultModel>(newPath, recentOperation)
+  }
+
   getRecentOperations():Observable<RecentOperationModel[]>{
     let newPath = this.apiUrl+"operations/getall"
     return this.httpClient.get<RecentOperationModel[]>(newPath)
@@ -48,15 +58,5 @@ export class OperationsService {
   deleteArchivedOperation(ArchivedOperation:ArchivedOperationModel):Observable<ResultModel>{
     let newPath = this.apiUrl+"archivedoperations/delete"
     return this.httpClient.post<ResultModel>(newPath, ArchivedOperation)
-  }
-
-  addRecentOperation(recentOperation:RecentOperationModel):Observable<ResultModel>{
-    let newPath = this.apiUrl + "operations/add"
-    return this.httpClient.post<ResultModel>(newPath, recentOperation)
-  }
-
-  updateRecentOperation(recentOperation:RecentOperationModel):Observable<ResultModel>{
-    let newPath = this.apiUrl + "operations/update"
-    return this.httpClient.post<ResultModel>(newPath, recentOperation)
   }
 }

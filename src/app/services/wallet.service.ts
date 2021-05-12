@@ -5,6 +5,8 @@ import { WalletModel } from 'src/app/models/walletModel';
 import { Observable } from 'rxjs';
 import { ResultModel } from '../models/resultModel';
 import { RecentOperationModel } from '../models/recentOperationModel';
+import { walletOperationModel } from '../models/walletOperationModel';
+import { OperationsService } from './operations.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +16,10 @@ export class WalletService {
 
   constructor(
     private httpClient:HttpClient,
+    private operationsService:OperationsService
     ) { }
 
+  walletRecentOperations:RecentOperationModel[]=[]
   apiUrl:string= environment.apiUrl + "/api/"
 
   getWallets():Observable<WalletModel[]>{
@@ -33,9 +37,23 @@ export class WalletService {
     return this.httpClient.post<ResultModel>(newPath, wallet)
   }
 
-  getWalletOperations():Observable<RecentOperationModel[]>{
+  getWalletOperations(id:number):Observable<walletOperationModel[]>{
     let newPath = this.apiUrl+"walletoperations/getall"
-    return this.httpClient.get<RecentOperationModel[]>(newPath)
+    let stringId= id.toString()
+    return this.httpClient.get<walletOperationModel[]>(newPath, {params:{id:stringId}})
+  }
+
+  getWalletRecentOperations(id:number){
+    setTimeout(() => {
+      this.getWalletOperations(id).subscribe((data)=>{
+        data.forEach(walletOperation => {
+          this.operationsService.getRecentOperationById(walletOperation.id).subscribe((recentOperation)=>{
+            this.walletRecentOperations.push(recentOperation)
+          })
+        });
+      })
+    }, 5000);
+    return this.walletRecentOperations
   }
 
   addWalletOperation(){

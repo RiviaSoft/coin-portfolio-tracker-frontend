@@ -25,7 +25,7 @@ const routes: Routes = [
     {path : "wallets", pathMatch: 'full', component:WalletsComponent, canActivate: [LoginGuardService]},
     {path : "archivedops", pathMatch: 'full', component:ArchivedOperationsComponent, canActivate: [LoginGuardService]},
     {path : "analyzes", pathMatch: 'full', component:AnalyzesComponent, canActivate: [LoginGuardService]},
-    {path : "walletdetail", pathMatch: 'full', component:WalletDetailComponent, canActivate: [LoginGuardService]}
+    {path : "wallets/:walletid", pathMatch: 'full', component:WalletDetailComponent, canActivate: [LoginGuardService]}
   ]}
 ];
 @NgModule({
