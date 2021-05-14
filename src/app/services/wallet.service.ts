@@ -44,16 +44,19 @@ export class WalletService {
   }
 
   getWalletRecentOperations(id:number){
-    setTimeout(() => {
-      this.getWalletOperations(id).subscribe((data)=>{
-        data.forEach(walletOperation => {
-          this.operationsService.getRecentOperationById(walletOperation.id).subscribe((recentOperation)=>{
-            this.walletRecentOperations.push(recentOperation)
-          })
-        });
-      })
-    }, 5000);
-    return this.walletRecentOperations
+    this.walletRecentOperations = []
+    console.log("1")
+    this.getWalletOperations(id).subscribe((data)=>{
+      data.forEach(walletOperation => {
+        this.operationsService.getRecentOperationById(walletOperation.operationid).subscribe((recentOperation)=>{
+          this.walletRecentOperations.push(recentOperation)
+          console.log(recentOperation)
+          console.log(walletOperation)
+        })
+      });
+      console.log("3")
+
+    })
   }
 
   addWalletOperation(){

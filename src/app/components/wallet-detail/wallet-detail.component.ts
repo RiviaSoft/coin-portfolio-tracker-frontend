@@ -3,7 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { RecentOperationModel } from 'src/app/models/recentOperationModel';
 import { walletOperationModel } from 'src/app/models/walletOperationModel';
+import { BinanceServiceService } from 'src/app/services/binance-service.service';
 import { OperationsService } from 'src/app/services/operations.service';
+import { PnlService } from 'src/app/services/pnl.service';
 import { WalletService } from 'src/app/services/wallet.service';
 
 @Component({
@@ -20,7 +22,9 @@ export class WalletDetailComponent implements OnInit {
     private activatedRoute:ActivatedRoute,
     private walletService:WalletService,
     private toastrService:ToastrService,
-    private operationsService:OperationsService
+    private operationsService:OperationsService,
+    private pnlService:PnlService,
+    public binanceService:BinanceServiceService
   
     ) { }
 
@@ -28,16 +32,17 @@ export class WalletDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       if(params['walletid']){
         this.walletId =  params['walletid'] ;
-        this.getWalletOperations(params['walletid'])
+        this.walletService.getWalletRecentOperations(params['walletid'])
+        setTimeout(() => {
+        this.getWalletOperations()
+        }, 3000);
       }
     })
-
   }
 
 
-  getWalletOperations(walletId:number){
-    this.walletRecentOperations= this.walletService.getWalletRecentOperations(walletId)
-    console.log(this.walletRecentOperations)
+  getWalletOperations(){
+    this.walletRecentOperations = this.walletService.walletRecentOperations
   }
 
 
@@ -47,6 +52,15 @@ export class WalletDetailComponent implements OnInit {
 
   deleteWalletOperation(){
 
+  }
+
+
+  pnlCalculate(amount: number, cost: number, price: number, coinsymbol:string): number {
+    return this.pnlService.profitLoss(amount, cost, price, coinsymbol, false);
+  }
+
+  pnlCalculatePercent(cost: number, price: number): number {
+    return this.pnlService.profitLossPercent(cost, price);
   }
 
 }
