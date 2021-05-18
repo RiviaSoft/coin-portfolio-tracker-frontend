@@ -5,11 +5,11 @@ import { Injectable } from '@angular/core';
 })
 export class PnlService {
 
-  constructor() { }
+  constructor(
+  ) { }
   
   recentPnl = new Map<string, number>();
-  archivedPnl = new Map<string, number>();
-
+  archivedPnl:number=0
 
   profitLoss(amount:number, cost:number, price:number, coinsymbol:string, isArchived:boolean):number{
     let pnl:number = (amount*price)-(amount*cost)
@@ -18,47 +18,39 @@ export class PnlService {
     if(!isArchived){
       this.recentPnl.set(coinsymbol, pnl)
     }else{
-      this.archivedPnl.set(coinsymbol, pnl)
+      //arşivlenmiş işlemlerin kâr/zararı hesaplanacak
     }
     return pnl
   }
 
   profitLossPercent(cost:number, price:number):number{
-    let pnl:number = (price-cost)/cost*100
-    let pnls:string = pnl.toFixed(2)
-    pnl = +pnls
-    return pnl
+    return this.toFixed(((price-cost)/cost*100), 2)
   }
 
   totalCostCalculate(amount: number, cost: number): number {
-    let totalCost:number= amount * cost;
-    let totalCosts:string = totalCost.toFixed(2)
-    totalCost = +totalCosts
-    return totalCost
+    return this.toFixed((amount * cost), 2)
   }
 
   totalValueCalculate(amount: number, price: number): number {
-    let stringValue = (amount * price).toFixed(2);
-    let totalValue= +stringValue
-    return totalValue 
+    return this.toFixed((amount * price), 2)
   }
 
   getRecentPnl():number{
-    return this.getTotalPnl(this.recentPnl)
+    let totalPnl:number = 0
+    this.recentPnl.forEach(element => {
+      totalPnl += element
+    });
+    return this.toFixed(totalPnl,2)
   }
 
   getArchivedPnl():number{
-    return this.getTotalPnl(this.archivedPnl)
+    return 0
   }
 
-  getTotalPnl(map:Map<string, number>){
-    let totalPnl:number = 0
-    map.forEach(element => {
-      totalPnl += element
-    });
-    let stringValue = totalPnl.toFixed(2);
-    totalPnl = +stringValue
-    return totalPnl
+  toFixed(int:number, fixed:number){
+    let stringValue = int.toFixed(fixed)
+    return +stringValue
   }
+
 
 }

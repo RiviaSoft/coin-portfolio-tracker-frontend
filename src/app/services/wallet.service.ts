@@ -37,34 +37,45 @@ export class WalletService {
     return this.httpClient.post<ResultModel>(newPath, wallet)
   }
 
+
   getWalletOperations(id:number):Observable<walletOperationModel[]>{
-    let newPath = this.apiUrl+"walletoperations/getall"
-    let stringId= id.toString()
-    return this.httpClient.get<walletOperationModel[]>(newPath, {params:{id:stringId}})
+    let newPath = this.apiUrl+"walletOperations/getall"
+    return this.httpClient.get<walletOperationModel[]>(newPath, {params: {
+      id:id.toString()
+    }})
   }
 
-  getWalletRecentOperations(id:number){
-    this.walletRecentOperations = []
-    console.log("1")
-    this.getWalletOperations(id).subscribe((data)=>{
-      data.forEach(walletOperation => {
-        this.operationsService.getRecentOperationById(walletOperation.operationid).subscribe((recentOperation)=>{
-          this.walletRecentOperations.push(recentOperation)
-          console.log(recentOperation)
-          console.log(walletOperation)
-        })
-      });
-      console.log("3")
 
-    })
+  // getWalletOperations(id:number):Observable<walletOperationModel[]>{
+  //   let newPath = this.apiUrl+"walletoperations/getall"
+  //   let stringId= id.toString()
+  //   return this.httpClient.get<walletOperationModel[]>(newPath, {params:{id:stringId}})
+  // }
+
+  // getWalletRecentOperations(id:number){
+  //   this.walletRecentOperations = []
+  //   console.log("1")
+  //   this.getWalletOperations(id).subscribe((data)=>{
+  //     data.forEach(walletOperation => {
+  //       this.operationsService.getRecentOperationById(walletOperation.operationid).subscribe((recentOperation)=>{
+  //         this.walletRecentOperations.push(recentOperation)
+  //         console.log(recentOperation)
+  //         console.log(walletOperation)
+  //       })
+  //     });
+  //     console.log("3")
+
+  //   })
+  // }
+
+  addWalletOperation(walletOperation:any):Observable<ResultModel>{
+    let newPath = this.apiUrl+"walletOperations/add"
+    return this.httpClient.post<ResultModel>(newPath, walletOperation)
   }
 
-  addWalletOperation(){
-
-  }
-
-  deleteWalletOperation(){
-    
+  deleteWalletOperation(walletOperation:any):Observable<ResultModel>{
+    let newPath = this.apiUrl+"walletoperations/delete"
+    return this.httpClient.post<ResultModel>(newPath, walletOperation)
   }
 
 }
