@@ -1,15 +1,30 @@
-
-<div class="row">
-  <div class="col-md-7 d-flex justify-content-center align-items-center" >
-    <img src="./assets/coins.webp" class="h-50" rel="preload" >
+<div class="row justify-content-center">
+  <div class="col-md-8 container-fluid">
+    <img src="./assets/welcome.webp" alt="logo" class="img-fluid" />
   </div>
-  <div class="col-md-5 d-flex align-items-center justify-content-center bg-dark">
-    <div class="container-sm h-50">
-        <nav class="nav nav-pills justify-content-center" >
-          <a [class]="getClass('login')" aria-current="page" (click)="setSelected('login')" routerLink="">Giriş Yap</a>
-          <a [class]="getClass('register')" (click)="setSelected('register')" routerLink="register">Kayıt Ol</a>
-        </nav>
-        <router-outlet></router-outlet>
+  <div class="col-md-4 mx-5 card card-body shadow-lg bg-transparent">
+    <nav class="nav nav-pills justify-content-center">
+      <a
+        [class]="getClass('login')"
+        aria-current="page"
+        (click)="setSelected('login')"
+        routerLink=""
+        >Giriş Yap</a
+      >
+      <a
+        [class]="getClass('register')"
+        (click)="setSelected('register')"
+        routerLink="register"
+        >Kayıt Ol</a
+      >
+    </nav>
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<div class="row justify-content-center fixed-bottom">
+  <footer class="bg-transparent shadow-lg text-center col-md-10">
+    <div class="text-center p-3">
+      © 2021 Copyright: @msrexe / @safderun
     </div>
-  </div>
+  </footer>
 </div>

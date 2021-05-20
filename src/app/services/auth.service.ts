@@ -22,7 +22,7 @@ export class AuthService {
 
   isAuthenticated() {
     return new Promise((resolve, reject) => {
-      let newUrl = environment.apiUrl + '/api/operations/getall';
+      let newUrl = environment.apiUrl + '/api/users/getcurrentuser';
       this.httpClient.get(newUrl).subscribe(
         (data) => {
           this.isLogged = true;
