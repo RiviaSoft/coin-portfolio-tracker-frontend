@@ -1,22 +1,173 @@
-<div class="table-responsive">
+<div class="container-fluid my-1">
+  <div class="row mb-2">
+    <button
+      type="button"
+      class="btn btn-outline-primary rounded mx-2 my-2 col-md-2"
+      data-toggle="modal"
+      data-target="#walletOperationAddModal"
+      (click)="getRecentOperations()"
+    >
+      ➕ İşlem Ekle
+    </button>
+  </div>
+
+  <div class="table-responsive">
     <table class="table">
-        <thead>
-            <tr>
-                <th class="text-center">Sembol</th>
-                <th class="text-center">Adet</th>
-                <th class="text-center">Alış</th>
-                <th class="text-center">Anlık</th>
-                <th class="text-center">Kâr/Zarar</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th>Bir</th>
-                <th>Operasyon</th>
-                <th>Var</th>
-                <th>Bu</th>
-                <th>Gece</th>
-            </tr>
-        </tbody>
+      <thead>
+        <tr>
+          <th class="text-center">Sembol</th>
+          <th class="text-center">Adet</th>
+          <th class="text-center">Alış</th>
+          <th class="text-center">Anlık</th>
+          <th class="text-center">Kâr/Zarar</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let operation of walletRecentOperations">
+          <td>
+            <h6>{{ operation.coinsymbol }}</h6>
+          </td>
+          <td>{{ operation.coinamount }}</td>
+          <td>Maliyet: {{ operation.buycost }}</td>
+          <td>
+            Fiyat:
+            {{ binanceService.prices.get(operation.coinsymbol.toLowerCase()) }}
+          </td>
+          <td>
+            Kar: %{{
+              pnlCalculatePercent(
+                operation.buycost,
+                binanceService.prices.get(operation.coinsymbol.toLowerCase())
+              )
+            }}
+          </td>
+          <td> 
+            <div class="dropdown">
+              <button
+                class="btn btn-outline-primary dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Seçenekler
+              </button>
+              <div
+                class="dropdown-menu bg-dark"
+                aria-labelledby="dropdownMenuButton"
+              >
+  
+                <button
+                  class="dropdown-item btn bg-dark"
+                  type="button"
+                  data-toggle="modal"
+                  data-target="#deleteWalletOperationModal"
+                  (click)="setSelectedOperation(operation)"
+                  >
+                  Sil
+                </button>
+              </div>
+            </div>
+
+          </td>
+        </tr>
+      </tbody>
     </table>
+  </div>
+</div>
+
+
+<!-- Modals -->
+
+<!-- Add Wallet Operation Modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="walletOperationAddModal">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content bg-dark">
+      <div class="modal-header">
+        <h4 class="modal-title">İşlem Ekle</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body container my-4">
+        <h2 class="h3 mb-3 font-weight-normal">
+          Hangi Coini Ekleyeceğinizi Seçiniz
+        </h2>
+        <ng-multiselect-dropdown
+          [placeholder]="'custom placeholder'"
+          [settings]="dropdownSettings"
+          [data]="recentOperations"
+          [(ngModel)]="selectedItems"
+          (onSelect)="setOperationId($event)"
+          (onSelectAll)="onSelectAll($event)"
+        >
+        </ng-multiselect-dropdown>
+        <br />
+        <br /><br /><br /><br /><br />
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          Kapat
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-dismiss="modal"
+          (click)="addWalletOperation()"
+        >
+          Ekle
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Wallet Operation Modal -->
+
+<div class="modal fade" tabindex="-1" role="dialog" id="deleteWalletOperationModal">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content bg-dark">
+      <div class="modal-header">
+        <h4 class="modal-title">İşlem Ekle</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body container my-4">
+        <h2 class="h3 mb-3 font-weight-normal">
+          Silmek İstediğinize Emin Misiniz?
+        </h2>
+        <h1>Sa</h1>
+        <br />
+        <br /><br /><br /><br /><br />
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          Kapat
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-dismiss="modal"
+          (click)="deleteWalletOperation()"
+        >
+          Sil
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
