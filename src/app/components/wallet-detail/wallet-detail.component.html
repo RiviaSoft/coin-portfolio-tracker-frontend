@@ -29,18 +29,54 @@
             <h6>{{ operation.coinsymbol }}</h6>
           </td>
           <td>{{ operation.coinamount }}</td>
-          <td>Maliyet: {{ operation.buycost }}</td>
           <td>
-            Fiyat:
-            {{ binanceService.prices.get(operation.coinsymbol.toLowerCase()) }}
+            <div class="d-flex justify-content-between px-4">
+              <strong>Birim Maliyet:</strong>
+              <span style="float: right">${{ operation.buycost}}</span>
+            </div>
+            <div class="d-flex justify-content-between px-4">
+              <strong>Toplam Maliyet:</strong>
+              <span style="float: right">${{totalCostCalculate(operation.buycost, operation.coinamount)}}</span>
+            </div>
           </td>
-          <td>
-            Kar: %{{
-              pnlCalculatePercent(
-                operation.buycost,
+          <td class="text-center w-25" *ngIf="binanceService.prices.get(operation.coinsymbol.toLowerCase())">
+            <div class="d-flex justify-content-between px-4">
+              <strong>Birim Değer:</strong>
+              <span>${{
                 binanceService.prices.get(operation.coinsymbol.toLowerCase())
-              )
-            }}
+              }}</span>
+            </div>
+            <div class="d-flex justify-content-between px-4">
+              <strong>Toplam Değer:</strong>
+              <span>${{
+                totalValueCalculate(
+                  binanceService.prices.get(operation.coinsymbol.toLowerCase()),
+                  operation.coinamount
+                )
+              }}</span>
+            </div>
+          </td>
+          <td class="text-center w-25">
+            <span
+              >%{{
+                pnlCalculatePercent(
+                  operation.buycost,
+                  binanceService.prices.get(operation.coinsymbol.toLowerCase())
+                )
+              }}</span
+            >
+  
+            <br />
+            <span
+              >${{
+                pnlCalculate(
+                  operation.coinamount,
+                  operation.buycost,
+                  binanceService.prices.get(operation.coinsymbol.toLowerCase()),
+                  operation.coinsymbol
+                )
+              }}</span
+            >
           </td>
           <td> 
             <div class="dropdown">
