@@ -13,6 +13,8 @@ import { UserService } from 'src/app/services/user.service';
 import { ArchivedOperationModel } from 'src/app/models/archivedOperationModel';
 import { BinanceServiceService } from 'src/app/services/binance-service.service';
 
+
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -215,4 +217,12 @@ export class DashboardComponent implements OnInit {
   getTotalPnl(){
     return this.pnlService.getRecentPnl()
   }
+
+  key:string="id"
+  reverse:boolean=false
+  sort(key:any){
+    this.key=key
+    this.reverse=!this.reverse
+  }
+
 }

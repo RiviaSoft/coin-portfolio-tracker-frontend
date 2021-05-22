@@ -27,7 +27,7 @@
     <table class="table">
       <thead>
         <tr>
-          <th class="text-center">Sembol</th>
+          <th (click)="sort('id')"  class="text-center fa fa-short">Sembol&nbsp;</th>
           <th class="text-center">Adet</th>
           <th class="text-center">Alış</th>
           <th class="text-center">Anlık</th>
@@ -36,11 +36,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr
-          *ngFor="
-            let operation of recentOperations | recentOperationFilter: filterText
-          "
-        >
+        <tr *ngFor= "let operation of recentOperations | recentOperationFilter: filterText | orderBy: key:reverse">
           <td class="text-center">
             <div
               *ngIf="
