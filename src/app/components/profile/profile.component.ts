@@ -52,15 +52,16 @@ export class ProfileComponent implements OnInit {
       if(this.profileForm.value.confirmPassword == this.profileForm.value.password) {
         this.updatedProfile.name=this.profileForm.value.name
         this.updatedProfile.password=this.profileForm.value.password
-        this.toastrService.success("Profil Güncellendi!", "Başarılı!")
         this.userService.updateProfile(this.updatedProfile).subscribe((data)=>{
-          console.log(data)
+          this.toastrService.success("Profil Güncellendi", "Başarılı!")
+        }, (error)=>{
+          this.toastrService.error("Profil Güncellenemedi", "Başarısız!")
         })
       } else{
-        this.toastrService.error("Şifreler Eşleşmiyor", "Başarısız")
+        this.toastrService.error("Şifreler Eşleşmiyor", "Başarısız!")
       }
     }else{
-      this.toastrService.error("Neyi Başaramadın @#%$&!", "Başaramadım")
+      this.toastrService.error("Profil Güncellenemedi", "Başarısız!")
     }
     
   }
