@@ -7,6 +7,7 @@ import { ArchivedOperationsComponent } from './components/archived-operations/ar
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { WalletDetailComponent } from './components/wallet-detail/wallet-detail.component';
@@ -25,7 +26,8 @@ const routes: Routes = [
     {path : "wallets", pathMatch: 'full', component:WalletsComponent, canActivate: [LoginGuardService]},
     {path : "archivedops", pathMatch: 'full', component:ArchivedOperationsComponent, canActivate: [LoginGuardService]},
     {path : "analyzes", pathMatch: 'full', component:AnalyzesComponent, canActivate: [LoginGuardService]},
-    {path : "wallets/:walletid", pathMatch: 'full', component:WalletDetailComponent, canActivate: [LoginGuardService]}
+    {path : "wallets/:walletid", pathMatch: 'full', component:WalletDetailComponent, canActivate: [LoginGuardService]},
+    {path : "profile", pathMatch: 'full', component:ProfileComponent, canActivate: [LoginGuardService]}
   ]}
 ];
 @NgModule({
