@@ -57,7 +57,7 @@ export class ArchivedOperationsComponent implements OnInit {
   }
 
   getTotalPnl(){
-    return this.pnlService.getArchivedPnl()
+    return this.pnlService.getArchivedPnl(this.archivedOperations)
   }
 
 }

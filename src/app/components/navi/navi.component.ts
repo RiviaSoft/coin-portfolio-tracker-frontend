@@ -34,7 +34,7 @@ export class NaviComponent implements OnInit {
     })
   }
   updateProfile(){
-    this.toastrService.info("Yakında...")
+    this.router.navigate(["home/profile"])
   }
 
   //değiştirilecek

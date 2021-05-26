@@ -1,0 +1,36 @@
+<div class="form-signin" style="background-color: transparent;border-radius: 8px;">
+    <form [formGroup]="profileForm">
+        <span>
+            <h3>Email: {{updatedProfile.email}}</h3>
+        </span>
+      <div class="form-floating">
+        <input
+          formControlName="name"
+          type="text"
+          class="form-control bg-dark"
+          placeholder="Kullanıcı Adı"
+        />
+      </div>
+      <br />
+      <div class="form-floating">
+        <input
+          formControlName="password"
+          type="password"
+          class="form-control bg-dark"
+          placeholder="Yeni Şifre"
+        />
+      </div>
+      <br>
+      <div class="form-floating">
+        <input
+          formControlName="confirmPassword"
+          type="password"
+          class="form-control bg-dark"
+          placeholder="Yeni Şifreyi Onayla"
+        />
+      </div>
+      <br>
+      <button class="w-100 btn btn-success" (click)="update()">Güncelle</button>
+    </form>
+  </div>
+  

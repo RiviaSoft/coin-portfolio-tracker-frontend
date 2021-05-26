@@ -24,6 +24,7 @@ export class WalletDetailComponent implements OnInit {
   coinSymbol:string
   selectedRecentOperationId:number
   selectedOperation = {}
+
   constructor(
     private activatedRoute:ActivatedRoute,
     private walletService:WalletService,
@@ -42,7 +43,9 @@ export class WalletDetailComponent implements OnInit {
         this.getWalletOperations(this.walletId)
       }
     })
-
+    setTimeout(() => {
+      this.getCoinPrice();
+    }, 1200);
     this.dropdownSettings = {
       singleSelection: true,
       idField: 'id',
@@ -113,6 +116,21 @@ export class WalletDetailComponent implements OnInit {
 
   onSelectAll(items: any) {
     console.log(items);
+  }
+
+
+  getCoinPrice(){
+    this.walletRecentOperations.forEach(element => {
+      this.binanceService.openWebSocket(element.coinsymbol.toLowerCase());
+    });
+  }
+
+  totalCostCalculate(coinAmount:number, coinPrice:number){
+    return this.pnlService.toFixed((coinAmount*coinPrice), 2)
+  }
+
+  totalValueCalculate(amount:number, price:number){
+    return this.pnlService.totalValueCalculate(amount, price)
   }
 
 }

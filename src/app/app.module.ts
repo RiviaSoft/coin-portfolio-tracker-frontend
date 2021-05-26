@@ -26,6 +26,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { RecentOperationFilterPipe } from './pipes/recent-operation-filter.pipe';
 import { ArchivedOperationFilterPipe } from './pipes/archived-operation-filter.pipe';
 import { WalletDetailComponent } from './components/wallet-detail/wallet-detail.component';
+import {Ng2OrderModule} from 'ng2-order-pipe';
+import { ProfileComponent } from './components/profile/profile.component'
+
 
 @NgModule({
   declarations: [
@@ -44,6 +47,7 @@ import { WalletDetailComponent } from './components/wallet-detail/wallet-detail.
     RecentOperationFilterPipe,
     ArchivedOperationFilterPipe,
     WalletDetailComponent,
+    ProfileComponent,
   ],
   imports: [
     FormsModule,
@@ -53,6 +57,7 @@ import { WalletDetailComponent } from './components/wallet-detail/wallet-detail.
     HttpClientModule,
     BrowserAnimationsModule,
     SelectDropDownModule,
+    Ng2OrderModule,
     NgMultiSelectDropDownModule.forRoot(),
     ToastrModule.forRoot({
       positionClass:"toast-bottom-right"
