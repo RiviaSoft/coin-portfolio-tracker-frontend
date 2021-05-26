@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ArchivedOperationModel } from '../models/archivedOperationModel';
 
 @Injectable({
   providedIn: 'root'
@@ -43,8 +44,12 @@ export class PnlService {
     return this.toFixed(totalPnl,2)
   }
 
-  getArchivedPnl():number{
-    return 0
+  getArchivedPnl(archivedOperations:ArchivedOperationModel[]):number{
+    let totalPnl = 0;
+    archivedOperations.forEach(element => {
+      totalPnl += (element.sellcost - element.buycost)*element.coinamount
+    });
+    return this.toFixed(totalPnl,2)
   }
 
   toFixed(int:number, fixed:number){
