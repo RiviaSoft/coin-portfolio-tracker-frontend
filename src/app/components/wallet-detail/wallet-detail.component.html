@@ -26,7 +26,45 @@
       <tbody>
         <tr *ngFor="let operation of walletRecentOperations">
           <td>
-            <h6>{{ operation.coinsymbol }}</h6>
+          <div
+              *ngIf="
+                pnlCalculatePercent(
+                  operation.buycost,
+                  binanceService.prices.get(operation.coinsymbol.toLowerCase())
+                ) > 0
+              "
+              class="badge btn bg-success"
+              data-toggle="modal"
+              data-target="#pnlModal"
+            >
+              <h6>{{ operation.coinsymbol }}</h6>
+            </div>
+            <div
+              *ngIf="
+                pnlCalculatePercent(
+                  operation.buycost,
+                  binanceService.prices.get(operation.coinsymbol.toLowerCase())
+                ) < 0
+              "
+              class="badge btn bg-danger"
+              data-toggle="modal"
+              data-target="#pnlModal"
+            >
+              <h6>{{ operation.coinsymbol }}</h6>
+            </div>
+            <div
+              *ngIf="
+                !pnlCalculatePercent(
+                  operation.buycost,
+                  binanceService.prices.get(operation.coinsymbol.toLowerCase())
+                )
+              "
+              class="badge bg-dark"
+              data-toggle="modal"
+              data-target="#pnlModal"
+            >
+              <h6>{{ operation.coinsymbol }}</h6>
+            </div>
           </td>
           <td>{{ operation.coinamount }}</td>
           <td>
@@ -134,10 +172,10 @@
       </div>
       <div class="modal-body container my-4">
         <h2 class="h3 mb-3 font-weight-normal">
-          Hangi Coini Ekleyeceğinizi Seçiniz
+          Hangi İşlemi Ekleyeceğinizi Seçiniz
         </h2>
         <ng-multiselect-dropdown
-          [placeholder]="'custom placeholder'"
+          [placeholder]="'Eklemek istediğiniz işlemi seçin'"
           [settings]="dropdownSettings"
           [data]="recentOperations"
           [(ngModel)]="selectedItems"
@@ -172,7 +210,7 @@
   <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content bg-dark">
       <div class="modal-header">
-        <h4 class="modal-title">İşlem Ekle</h4>
+        <h4 class="modal-title">Silme işlemini onayla</h4>
         <button
           type="button"
           class="close"
@@ -186,9 +224,6 @@
         <h2 class="h3 mb-3 font-weight-normal">
           Silmek İstediğinize Emin Misiniz?
         </h2>
-        <h1>Sa</h1>
-        <br />
-        <br /><br /><br /><br /><br />
       </div>
 
       <div class="modal-footer">
